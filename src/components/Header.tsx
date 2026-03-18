@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { MobileMenu } from "./MobileMenu";
 
 const navLinks = [
+  { label: "PROJECTS | PROYECTOS", path: "/proyectos" },
   { label: "US | NOSOTROS", path: "/nosotros" },
   { label: "PHILOSOPHY | FILOSOFÍA", path: "/philosophy" },
   { label: "SERVICES | SERVICIOS", path: "/services" },
