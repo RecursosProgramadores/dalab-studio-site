@@ -14,8 +14,11 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Montserrat", "sans-serif"],
-        body: ["Inter", "sans-serif"],
+        sans: ["Bahnschrift", "'DIN Alternate'", "sans-serif"],
+        serif: ["'TT Norms'", "Montserrat", "sans-serif"],
+        display: ["'TT Norms'", "Montserrat", "sans-serif"],
+        body: ["Bahnschrift", "'DIN Alternate'", "sans-serif"],
+        alt: ["Montserrat", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

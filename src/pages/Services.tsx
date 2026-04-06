@@ -1,125 +1,190 @@
+import { useState } from "react";
 import { PageLayout } from "@/components/PageLayout";
+import pruebaImg from "@/assets/prueba.png";
 
-// Imports de imágenes
-import imgArquitectura from "@/assets/servicio/ARQUITECTURAESPECIALIDADES.png";
-import imgInteriorismo from "@/assets/servicio/INTERIORISMO.png";
-import imgMobiliario from "@/assets/servicio/MOBILIARIO.png";
-import imgGerencia from "@/assets/servicio/GERENCIASUPERVISION.png";
-import imgEjecucion from "@/assets/servicio/EJECUCIONDEOBRA.png";
+const servicesData = {
+  diseño: [
+    { id: "urb", title: "URBANISMO", desc: "Planificación y diseño de entornos urbanos sostenibles y funcionales que mejoran la calidad de vida en la ciudad." },
+    { id: "pai", title: "PAISAJISMO", desc: "Integración de la naturaleza y el diseño arquitectónico para crear espacios exteriores armoniosos y vivos." },
+    { id: "arq", title: "ARQUITECTURA", desc: "Diseño conceptual y técnico de edificaciones con un enfoque en la estética, funcionalidad y habitabilidad." },
+    { id: "int", title: "INTERIORES", desc: "Transformación de espacios internos mediante el uso de texturas, iluminación y materiales premium." },
+  ],
+  construccion: [
+    { id: "ger", title: "GERENCIA", desc: "Administración integral de recursos y procesos para garantizar que el proyecto cumpla con plazos y presupuestos." },
+    { id: "eje", title: "EJECUCIÓN", desc: "Materialización de lo planificado bajo los más altos estándares de calidad y rigor normativo." },
+  ]
+};
 
-const services = [
-  {
-    category: "DISEÑO",
-    title: "ARQUITECTURA + ESPECIALIDADES",
-    image: imgArquitectura,
-    text: "Es la etapa de diseño del proyecto elaborando la documentación técnica de arquitectura y especialidades (Expediente Técnico), con el objetivo de obtener la licencia de ediﬁcación correspondiente, ya sea una Obra Nueva, Ampliación, Remodelación, Demolición o Acondicionamiento.\n\nEsta documentación deﬁne el alcance del proyecto, justiﬁca los costos y plazos de duración de las etapas. Además permite que todos los involucrados en la construcción estén alineados.\n\nEn nuestra experiencia, este paso es fundamental para que el proyecto cumpla con la calidad deseada. Es imprescindible ponerle especial énfasis a esta fase del proceso, ya que es el momento en que se deﬁne todos los pormenores del proyecto, de manera clara y especíﬁca."
-  },
-  {
-    category: "DISEÑO",
-    title: "INTERIORISMO",
-    image: imgInteriorismo,
-    text: "Es el diseño de la distribución, mobiliario, acabados, complementos e iluminación de cada ambiente de manera que se conciba como un proyecto integral.\n\nNosotros lo realizamos conociendo al cliente y sus necesidades para elaborar una propuesta acorde a sus expectativas, entregando un modelo 3D, planos, moodboard, vistas y el presupuesto para la ejecución de obra.\n\nPara nosotros es clave entablar una relación muy cercana con nuestros clientes, de esta manera podemos conocerlos y reconocer su forma de pensar sobre ciertos puntos particularmente importantes para elaborar un diseño ideal, que se adapte a sus preferencias y satisfaga sus expectativas."
-  },
-  {
-    category: "DISEÑO",
-    title: "MOBILIARIO DISEÑO + FABRICACIÓN",
-    image: imgMobiliario,
-    text: "Es el diseño y fábrica de muebles a medida, para algún espacio en particular, tomando en cuenta el entorno y los requisitos estéticos y funcionales del cliente, aportando nuestra experiencia, conocimiento técnico y sensibilidad al proyecto.\n\nEn este aspecto somos pragmáticos, buscamos soluciones técnicamente simples para resolver problemas complejos, adaptando nuestras propuestas a cualquier estilo de diseño de interiores."
-  },
-  {
-    category: "CONSTRUCCIÓN",
-    title: "GERENCIA + SUPERVISIÓN",
-    image: imgGerencia,
-    text: "La gerencia de proyectos es la disciplina de organizar y administrar los recursos para lograr que un proyecto cumpla con sus objetivos de alcance, tiempo y costos. Mientras que la supervisión de obra es el monitoreo y control de los procesos para garantizar que se cumpla con las especiﬁcaciones del entregable.\n\nNosotros realizamos la supervisión y gerencia de proyectos tomando como guía el enfoque del PMBOK, siguiendo los cinco grupos de procesos: inicio, planiﬁcación, ejecución, control y monitoreo, y cierre; a través de las 10 áreas de conocimiento: integración, alcance, tiempo, costo, calidad, recursos, riesgos, comunicaciones, adquisiciones e interesados."
-  },
-  {
-    category: "CONSTRUCCIÓN",
-    title: "EJECUCIÓN DE OBRA",
-    image: imgEjecucion,
-    text: "La ejecución de obra es la parte del proyecto en la que se hace realidad lo planiﬁcado, siguiendo la metodología y protocolos establecidos.\n\nNosotros realizamos la ejecución de obra de construcción en modalidad llave en mano o por partidas, según sea el requerimiento del cliente, cumpliendo todos los protocolos normativos para el sector construcción, según RNE, ministerio de vivienda y municipalidad correspondiente.\n\nNuestra experiencia en este rubro nos ha permitido trabajar con el personal más capacitado y las mejores empresas del mercado, garantizando un proyecto con los más altos estándares de calidad en cada una de sus partidas. Nuestra trayectoria nos avala."
-  }
-];
+const flowData = {
+  contacto: { id: "con", title: "CONTACTO", desc: "Primer punto de encuentro para entender las necesidades y visión de nuestros clientes." },
+  diseño: [
+    { id: "san", title: "SANEAMIENTO", desc: "Gestión técnica y normativa inicial para la viabilidad del terreno o edificación." },
+    { id: "pre", title: "PRE-ANTEPROYECTO", desc: "Exploración de ideas y esquemas básicos para definir el rumbo del diseño." },
+    { id: "ant", title: "ANTEPROYECTO", desc: "Definición espacial y volumétrica de la propuesta arquitectónica." },
+    { id: "pro", title: "PROYECTO", desc: "Detalle técnico completo y especializado para la obtención de licencias." },
+    { id: "doc", title: "DOCUMENTOS DE OBRA", desc: "Expediente técnico final con todas las especificaciones para la construcción." },
+  ],
+  construccion: [
+    { id: "pre-c", title: "PRESUPUESTO", desc: "Análisis detallado de costos para una ejecución financiera transparente y eficiente." },
+    { id: "ini", title: "INICIO DE OBRA", desc: "Movilización y preparación del terreno para el comienzo de las actividades." },
+    { id: "proc", title: "PROCESO CONSTRUCTIVO", desc: "Seguimiento riguroso de cada fase de edificación asegurando la calidad." },
+    { id: "cie", title: "CIERRE DE OBRA", desc: "Finalización de acabados y entrega de la estructura terminada al cliente." },
+    { id: "post", title: "POST-EJECUCIÓN", desc: "Servicio de seguimiento y garantía post-entrega para asegurar la satisfacción total." },
+  ]
+};
+
+function SplitSection({ 
+  title, 
+  leftData, 
+  rightData, 
+  inverted = false, 
+  topItem = null 
+}: { 
+  title: string, 
+  leftData: any[], 
+  rightData: any[], 
+  inverted?: boolean,
+  topItem?: any 
+}) {
+  const [hovered, setHovered] = useState<any>(null);
+
+  const leftBg = inverted ? "bg-black" : "bg-white";
+  const leftText = inverted ? "text-white" : "text-black";
+  const rightBg = inverted ? "bg-white" : "bg-black";
+  const rightText = inverted ? "text-white" : "text-black"; // In construction (black side) text should be white usually
+
+  return (
+    <div className="relative w-full border-t border-black/5">
+      {/* Title Centered Top - Two Tone for Contrast */}
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-30 flex">
+        <h2 className={`font-display font-medium text-[10px] md:text-xs tracking-[0.4em] uppercase`}>
+          {title === "SERVICIOS" ? (
+            <>
+              <span className="text-black">SERVI</span>
+              <span className="text-white">CIOS</span>
+            </>
+          ) : (
+            <>
+              <span className="text-white">FLUJO DE</span>
+              <span className="text-black tracking-[0.4em]"> TRABAJO</span>
+            </>
+          )}
+        </h2>
+      </div>
+
+      <div className="flex flex-col md:flex-row h-auto md:h-[120vh] relative overflow-hidden">
+        
+        {/* Left Half */}
+        <div className={`w-full md:w-1/2 min-h-[50vh] ${leftBg} relative p-12 md:p-24 flex flex-col justify-center transition-colors duration-500`}>
+          <div className="relative z-20">
+            {topItem && (
+              <div 
+                className="mb-16 group cursor-pointer"
+                onMouseEnter={() => setHovered({ ...topItem, side: 'left' })}
+                onMouseLeave={() => setHovered(null)}
+              >
+                <h3 className={`font-display text-lg md:text-xl tracking-[0.2em] mb-4 text-center md:text-left ${inverted ? 'text-white' : 'text-black'}`}>
+                  {topItem.title}
+                </h3>
+              </div>
+            )}
+            
+            <h4 className={`font-display text-[10px] tracking-[0.3em] mb-12 opacity-50 text-center md:text-left ${inverted ? 'text-white' : 'text-black'}`}>
+              DISEÑO
+            </h4>
+            
+            <div className="space-y-4 md:space-y-8 flex flex-col items-center md:items-start">
+              {leftData.map((item) => (
+                <div 
+                  key={item.id} 
+                  className="group cursor-pointer"
+                  onMouseEnter={() => setHovered({ ...item, side: 'left' })}
+                  onMouseLeave={() => setHovered(null)}
+                >
+                  <span className={`block font-display text-sm md:text-lg tracking-[0.15em] transition-all duration-300 group-hover:pl-4 ${inverted ? 'text-white/50 group-hover:text-white' : 'text-black/50 group-hover:text-black'}`}>
+                    {item.title}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Active Text Overlay for Left Side */}
+          <div className={`absolute inset-0 z-21 pointer-events-none p-12 md:p-24 flex items-center justify-center transition-opacity duration-500 ${hovered?.side === 'left' ? 'opacity-100' : 'opacity-0'}`}>
+            <div className={`max-w-md text-center ${inverted ? 'text-white' : 'text-black'}`}>
+              <h3 className="font-display text-2xl md:text-3xl tracking-[0.2em] mb-8 uppercase">{hovered?.title}</h3>
+              <p className="font-body text-sm md:text-base leading-relaxed opacity-80">{hovered?.desc}</p>
+            </div>
+          </div>
+
+          {/* Image Overlay for when RIGHT side is hovered */}
+          <div className={`absolute inset-0 z-10 transition-opacity duration-700 ${hovered?.side === 'right' ? 'opacity-100' : 'opacity-0'}`}>
+             <img src={pruebaImg} alt="Reference" className="w-full h-full object-cover grayscale" />
+             <div className={`absolute inset-0 ${inverted ? 'bg-black/40' : 'bg-white/20'}`} />
+          </div>
+        </div>
+
+        {/* Right Half */}
+        <div className={`w-full md:w-1/2 min-h-[50vh] ${rightBg} relative p-12 md:p-24 flex flex-col justify-center transition-colors duration-500`}>
+          <div className="relative z-20">
+            <h4 className={`font-display text-[10px] tracking-[0.3em] mb-12 opacity-50 text-center md:text-left ${!inverted ? 'text-white' : 'text-black'}`}>
+              CONSTRUCCIÓN
+            </h4>
+            
+            <div className="space-y-4 md:space-y-8 flex flex-col items-center md:items-start">
+              {rightData.map((item) => (
+                <div 
+                  key={item.id} 
+                  className="group cursor-pointer"
+                  onMouseEnter={() => setHovered({ ...item, side: 'right' })}
+                  onMouseLeave={() => setHovered(null)}
+                >
+                  <span className={`block font-display text-sm md:text-lg tracking-[0.15em] transition-all duration-300 group-hover:pl-4 ${!inverted ? 'text-white/50 group-hover:text-white' : 'text-black/50 group-hover:text-black'}`}>
+                    {item.title}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Active Text Overlay for Right Side */}
+          <div className={`absolute inset-0 z-21 pointer-events-none p-12 md:p-24 flex items-center justify-center transition-opacity duration-500 ${hovered?.side === 'right' ? 'opacity-100' : 'opacity-0'}`}>
+            <div className={`max-w-md text-center ${!inverted ? 'text-white' : 'text-black'}`}>
+              <h3 className="font-display text-2xl md:text-3xl tracking-[0.2em] mb-8 uppercase">{hovered?.title}</h3>
+              <p className="font-body text-sm md:text-base leading-relaxed opacity-80">{hovered?.desc}</p>
+            </div>
+          </div>
+
+          {/* Image Overlay for when LEFT side is hovered */}
+          <div className={`absolute inset-0 z-10 transition-opacity duration-700 ${hovered?.side === 'left' ? 'opacity-100' : 'opacity-0'}`}>
+             <img src={pruebaImg} alt="Reference" className="w-full h-full object-cover grayscale" />
+             <div className={`absolute inset-0 ${!inverted ? 'bg-black/40' : 'bg-white/20'}`} />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
 
 export default function Services() {
   return (
     <PageLayout>
-      <div className="bg-[#fdfdfd] min-h-screen text-[#111] pb-32">
+      <div className="flex flex-col w-full">
+        <SplitSection 
+          title="SERVICIOS"
+          leftData={servicesData.diseño}
+          rightData={servicesData.construccion}
+          inverted={false}
+        />
         
-        {/* Header Section */}
-        <div className="pt-24 pb-16 px-6 lg:px-12 max-w-7xl mx-auto flex flex-col items-center">
-          <div className="flex items-center w-full justify-center mb-16 opacity-40">
-            <div className="h-[1px] flex-1 bg-black max-w-[50px] md:max-w-[150px]" />
-            <h1 className="font-sans text-[10px] md:text-sm tracking-[0.3em] font-medium uppercase px-4 md:px-8 text-center text-[#1c3865]">
-              Nuestros Servicios
-            </h1>
-            <div className="h-[1px] flex-1 bg-black max-w-[50px] md:max-w-[150px]" />
-          </div>
-
-          {/* Sub-header index */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-32 w-full max-w-4xl text-center md:text-left mb-24 uppercase">
-            <div className="flex flex-col items-center md:items-start">
-              <h2 className="font-serif text-3xl md:text-4xl tracking-[0.1em] mb-6 md:mb-8 font-light text-[#1c3865]">DISEÑO</h2>
-              <ul className="font-sans text-[10px] md:text-xs tracking-[0.2em] leading-[2.5] text-black/60 space-y-2">
-                <li>ARQUITECTURA + ESPECIALIDADES</li>
-                <li>INTERIORISMO</li>
-                <li>MOBILIARIO</li>
-              </ul>
-            </div>
-            <div className="flex flex-col items-center md:items-start">
-              <h2 className="font-serif text-3xl md:text-4xl tracking-[0.1em] mb-6 md:mb-8 font-light text-[#1c3865]">CONSTRUCCIÓN</h2>
-              <ul className="font-sans text-[10px] md:text-xs tracking-[0.2em] leading-[2.5] text-black/60 space-y-2">
-                <li>GERENCIA + SUPERVISIÓN</li>
-                <li>EJECUCIÓN DE OBRA</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Services List with Alternating Layout */}
-        <div className="flex flex-col w-full">
-          {services.map((service, index) => {
-            const isEven = index % 2 === 0;
-
-            return (
-              <div 
-                key={index} 
-                className={`py-16 md:py-24 ${!isEven ? 'bg-[#f5f5f5]' : 'bg-[#fdfdfd]'}`}
-              >
-                <div className="px-6 lg:px-12 max-w-7xl mx-auto">
-                  <div className={`grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 lg:gap-24 items-center`}>
-                    
-                    {/* Text Side */}
-                    <div className={`flex flex-col order-2 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
-                      <span className="font-sans text-[10px] tracking-[0.4em] text-[#1c3865]/60 font-semibold uppercase mb-4">
-                        {service.category}
-                      </span>
-                      <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl tracking-[0.05em] mb-8 font-light text-[#1c3865] leading-[1.2]">
-                        {service.title}
-                      </h3>
-                      <div className="font-sans text-sm md:text-[15px] leading-relaxed text-black/70 space-y-6">
-                        {service.text.split('\n\n').map((paragraph, pIdx) => (
-                          <p key={pIdx} className="text-justify md:text-left">{paragraph}</p>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Image Side */}
-                    <div className={`order-1 ${isEven ? 'lg:order-2' : 'lg:order-1'} w-full h-full min-h-[400px] lg:min-h-[600px] relative overflow-hidden shadow-xl`}>
-                      <img 
-                        src={service.image} 
-                        alt={service.title} 
-                        className="absolute inset-0 w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
+        <SplitSection 
+          title="FLUJO DE TRABAJO"
+          leftData={flowData.diseño}
+          rightData={flowData.construccion}
+          topItem={flowData.contacto}
+          inverted={true}
+        />
       </div>
     </PageLayout>
   );

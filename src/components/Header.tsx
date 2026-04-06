@@ -1,19 +1,25 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logoImg from "../assets/logos/logoRAM.jpg";
+import logoProyectos from "../assets/logos/logoproyectos.png";
+import logoFooter from "../assets/logos/logofooter.png";
 
 const navLinks = [
-  { label: "PROJECTS | PROYECTOS", path: "/proyectos" },
-  { label: "US | NOSOTROS", path: "/nosotros" },
-  { label: "PHILOSOPHY | FILOSOFÍA", path: "/philosophy" },
-  { label: "SERVICES | SERVICIOS", path: "/services" },
-  { label: "GALLERY | GALERÍA", path: "/gallery" },
-  { label: "CONTACT | CONTACTO", path: "/contact" },
+  { label: "RAM", path: "/nosotros" },
+  { label: "SERVICIOS", path: "/services" },
+  { label: "PROYECTOS", path: "/proyectos" },
+  { label: "INVESTIGACION", path: "/philosophy" },
+  { label: "CONTACTO", path: "/contact" },
 ];
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const isProyectosPage = location.pathname.startsWith("/proyectos");
+  const isNosotrosPage = location.pathname.startsWith("/nosotros");
+  const isServicesPage = location.pathname.startsWith("/services");
+  const isContactPage = location.pathname.startsWith("/contact");
+  const isDarkTheme = isProyectosPage || isNosotrosPage || isContactPage;
 
   useEffect(() => {
     setMenuOpen(false);
@@ -33,7 +39,17 @@ export function Header() {
   return (
     <>
       {/* Professional Sticky Top Navigation */}
-      <header className="sticky top-0 z-40 w-full bg-[#fdfdfd] border-b border-black/5 flex items-center justify-between px-6 md:px-12 py-2 lg:py-2.5 transition-all duration-300">
+      <header 
+        className={`sticky top-0 z-40 w-full flex items-center justify-between px-6 md:px-12 py-2 lg:py-2.5 transition-all duration-300 border-b ${
+          isNosotrosPage
+            ? "bg-[#000000] border-white/10"
+            : (isProyectosPage || isContactPage)
+              ? "bg-[#1c3865] border-white/10" 
+              : isServicesPage
+                ? "bg-[#ffffff] border-black/5"
+                : "bg-[#fdfdfd] border-black/5"
+        }`}
+      >
         
         {/* Left: Hamburger */}
         <div className="flex-1 flex items-center">
@@ -42,9 +58,9 @@ export function Header() {
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
           >
-            <span className="block w-full h-[1.5px] bg-[#111] transition-transform duration-300 ease-out origin-right group-hover:scale-x-75" />
-            <span className="block w-full h-[1.5px] bg-[#111] transition-opacity duration-300 ease-out" />
-            <span className="block w-full h-[1.5px] bg-[#111] transition-transform duration-300 ease-out origin-right group-hover:scale-x-50" />
+            <span className={`block w-full h-[1.5px] transition-transform duration-300 ease-out origin-right group-hover:scale-x-75 ${isDarkTheme ? "bg-white" : "bg-[#111]"}`} />
+            <span className={`block w-full h-[1.5px] transition-opacity duration-300 ease-out ${isDarkTheme ? "bg-white" : "bg-[#111]"}`} />
+            <span className={`block w-full h-[1.5px] transition-transform duration-300 ease-out origin-right group-hover:scale-x-50 ${isDarkTheme ? "bg-white" : "bg-[#111]"}`} />
           </button>
         </div>
 
@@ -57,23 +73,13 @@ export function Header() {
             aria-label="Home"
           />
           
-          {/* 
-            Contenedor para RECORTAR el espacio en blanco gigante 
-            que la imagen original tiene en la mitad de abajo.
-          */}
-          <div className="overflow-hidden flex items-start justify-center w-[50px] sm:w-[60px] md:w-[70px] lg:w-[86px] h-[30px] sm:h-[36px] md:h-[42px] lg:h-[52px]">
-            <img 
-              src={logoImg} 
-              alt="RAM Diseño Arquitectura" 
-              className="w-full h-auto object-cover object-top mix-blend-multiply drop-shadow-sm transition-transform duration-300" 
-              loading="eager"
-            />
-          </div>
+          <img 
+            src={isNosotrosPage ? logoFooter : ((isProyectosPage || isContactPage) ? logoProyectos : logoImg)} 
+            alt="RAM Diseño Arquitectura" 
+            className="w-[90px] sm:w-[110px] md:w-[130px] h-auto transition-opacity duration-[1.5s] ease-in-out" 
+            loading="eager"
+          />
           
-          {/* Subtítulo dinámico pegado directamente debajo del marco recortado */}
-          <span className="font-sans text-[5px] sm:text-[5.5px] md:text-[6.5px] lg:text-[7.5px] tracking-[0.45em] text-[#444] font-bold whitespace-nowrap mt-[2px] lg:mt-[4px] pl-[0.45em]">
-            ARCHITECTURE  |  INTERIORS  |  BUILDING
-          </span>
         </div>
 
         {/* Right: Empty space to balance the sticky header */}
@@ -105,18 +111,16 @@ export function Header() {
           </button>
 
           {/* Vertical Nav List */}
-          <nav className="flex flex-col items-center text-center gap-6 md:gap-10">
+          <nav className="flex flex-col items-center text-center gap-5 md:gap-8">
             {navLinks.map((link, i) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className="group relative inline-flex flex-col items-center overflow-hidden"
+                className="group relative inline-flex flex-col items-center"
               >
-                <span className="block font-serif font-light text-[24px] sm:text-[32px] md:text-[42px] text-white/90 tracking-[0.1em] md:tracking-[0.15em] leading-[1.6] uppercase transition-all duration-300 group-hover:text-[#c4a661] group-hover:tracking-[0.2em] md:group-hover:tracking-[0.25em]">
+                <span className="block font-display font-light text-[18px] sm:text-[22px] md:text-[28px] text-white tracking-[0.2em] md:tracking-[0.25em] leading-[1.6] uppercase transition-all duration-300 group-hover:text-blue-600 group-hover:italic">
                   {link.label}
                 </span>
-                {/* Thin animated underline to gold */}
-                <span className="absolute bottom-1 w-full h-[1px] bg-[#c4a661] origin-center scale-x-0 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-x-100" />
               </Link>
             ))}
           </nav>

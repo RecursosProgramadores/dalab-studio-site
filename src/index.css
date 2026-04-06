@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -59,7 +59,49 @@
     @apply bg-background text-foreground font-body antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
+  h1 {
+    @apply font-display font-extrabold;
+  }
+  h2 {
+    @apply font-display font-bold;
+  }
+  h3 {
+    @apply font-display font-normal;
+  }
+  h4 {
+    @apply font-display font-light;
+  }
+}
+
+@layer components {
+  .text-body,
+  .data-label,
+  .caption {
+    @apply font-body font-normal;
+  }
+
+  .text-semibold {
+    @apply font-semibold;
+  }
+
+  .text-bold {
+    @apply font-bold;
+  }
+
+  .text-light {
+    @apply font-light;
+  }
+
+  .alt-text,
+  .print-text {
+    @apply font-alt font-normal;
+  }
+
+  .alt-semibold {
+    @apply font-semibold;
+  }
+
+  .alt-bold {
+    @apply font-bold;
   }
 }
