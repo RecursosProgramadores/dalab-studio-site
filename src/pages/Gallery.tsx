@@ -55,13 +55,13 @@ export default function Gallery() {
         {/* Modern Header Section */}
         <div className="pt-32 pb-16 px-6 lg:px-12 max-w-7xl mx-auto flex flex-col items-center">
           <div className="flex items-center w-full justify-center mb-8 opacity-40">
-            <div className="h-[1px] flex-1 bg-[#1c3865] max-w-[50px] md:max-w-[150px]" />
-            <h1 className="font-sans text-[10px] md:text-sm tracking-[0.3em] font-medium uppercase px-4 md:px-8 text-center text-[#1c3865]">
+            <div className="h-[1px] flex-1 bg-[#1C3865] max-w-[50px] md:max-w-[150px]" />
+            <h1 className="font-sans text-[10px] md:text-sm tracking-[0.3em] font-medium uppercase px-4 md:px-8 text-center text-[#1C3865]">
               Portafolio
             </h1>
-            <div className="h-[1px] flex-1 bg-[#1c3865] max-w-[50px] md:max-w-[150px]" />
+            <div className="h-[1px] flex-1 bg-[#1C3865] max-w-[50px] md:max-w-[150px]" />
           </div>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-5xl tracking-[0.05em] font-light text-[#1c3865] text-center mb-6">
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-5xl tracking-[0.05em] font-light text-[#1C3865] text-center mb-6">
             GALERÍA DE PROYECTOS
           </h2>
           <p className="font-sans text-[13px] md:text-[14px] leading-relaxed text-black/60 text-center max-w-2xl mx-auto">

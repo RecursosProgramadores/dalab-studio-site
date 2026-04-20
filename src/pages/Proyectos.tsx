@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 import { PageLayout } from "@/components/PageLayout";
 import pruebaImg from "@/assets/prueba.png";
 
@@ -18,15 +18,13 @@ const projects = [
 ];
 
 function ProjectItem({ project }: { project: typeof projects[0] }) {
-  const [isActive, setIsActive] = useState(false);
-
   return (
-    <div 
-      className="relative aspect-square cursor-pointer overflow-hidden group border-b border-r border-white/5"
-      onClick={() => setIsActive(!isActive)}
+    <Link 
+      to={`/proyectos/${project.slug}`}
+      className="relative aspect-square cursor-pointer overflow-hidden group border-b border-r border-white/5 block"
     >
       {/* Default State: Blue background with White Lines (Simulated) */}
-      <div className={`absolute inset-0 z-10 transition-opacity duration-500 bg-[#1c3865] flex items-center justify-center ${isActive ? "opacity-0" : "opacity-100"}`}>
+      <div className="absolute inset-0 z-10 transition-opacity duration-500 bg-[#1C3865] flex items-center justify-center group-hover:opacity-0 opacity-100">
         {/* Simplified Sketch Representation (House/Building SVG in white) */}
         <svg 
           viewBox="0 0 100 100" 
@@ -47,15 +45,13 @@ function ProjectItem({ project }: { project: typeof projects[0] }) {
       <img 
         src={pruebaImg} 
         alt={project.title} 
-        className={`w-full h-full object-cover transition-transform duration-700 ${isActive ? "scale-100 pointer-events-auto" : "scale-110 pointer-events-none"}`}
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-100 scale-110"
         loading="lazy"
       />
 
-      {/* Info Bar: Appears on Click */}
+      {/* Info Bar: Appears on Hover */}
       <div 
-        className={`absolute bottom-0 left-0 w-full bg-black text-white p-4 transition-transform duration-500 ease-out z-20 ${
-          isActive ? "translate-y-0" : "translate-y-full"
-        }`}
+        className="absolute bottom-0 left-0 w-full bg-black text-white p-4 transition-transform duration-500 ease-out z-20 translate-y-full group-hover:translate-y-0"
       >
         <div className="flex flex-col space-y-0.5">
           <h3 className="font-display font-medium text-[12px] md:text-[14px] tracking-[0.2em] uppercase">
@@ -66,14 +62,14 @@ function ProjectItem({ project }: { project: typeof projects[0] }) {
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
 export default function Proyectos() {
   return (
     <PageLayout>
-      <div className="bg-[#1c3865] min-h-screen">
+      <div className="bg-[#1C3865] min-h-screen">
         <div className="grid grid-cols-2 md:grid-cols-4 w-full gap-0 border-t border-white/10">
           {projects.map((project) => (
             <ProjectItem key={project.slug} project={project} />

@@ -14,10 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Bahnschrift", "'DIN Alternate'", "sans-serif"],
-        serif: ["'TT Norms'", "Montserrat", "sans-serif"],
-        display: ["'TT Norms'", "Montserrat", "sans-serif"],
-        body: ["Bahnschrift", "'DIN Alternate'", "sans-serif"],
+        sans: ["Montserrat", "sans-serif"],
+        serif: ["Montserrat", "sans-serif"],
+        display: ["Montserrat", "sans-serif"],
+        body: ["Montserrat", "sans-serif"],
         alt: ["Montserrat", "sans-serif"],
       },
       colors: {

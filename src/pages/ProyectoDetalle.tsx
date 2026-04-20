@@ -114,7 +114,7 @@ export default function ProyectoDetalle() {
           {/* Left Arrow Button */}
           <button 
             onClick={prevView}
-            className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#1c3865] flex items-center justify-center text-white opacity-80 hover:opacity-100 transition-opacity shadow-lg"
+            className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#1C3865] flex items-center justify-center text-white opacity-80 hover:opacity-100 transition-opacity shadow-lg"
             aria-label="Previous view"
           >
             <MoveLeft className="w-6 h-6 md:w-8 md:h-8" strokeWidth={1} />
@@ -123,7 +123,7 @@ export default function ProyectoDetalle() {
           {/* Right Arrow Button */}
           <button 
             onClick={nextView}
-            className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#1c3865] flex items-center justify-center text-white opacity-80 hover:opacity-100 transition-opacity shadow-lg"
+            className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#1C3865] flex items-center justify-center text-white opacity-80 hover:opacity-100 transition-opacity shadow-lg"
             aria-label="Next view"
           >
             <MoveRight className="w-6 h-6 md:w-8 md:h-8" strokeWidth={1} />
@@ -135,8 +135,8 @@ export default function ProyectoDetalle() {
               <button
                 key={idx}
                 onClick={(e) => { e.stopPropagation(); setCurrentView(idx); }}
-                className={`w-3 h-3 md:w-3.5 md:h-3.5 rounded-full border-[1.5px] border-[#1c3865] transition-all duration-300 ${
-                  idx === currentView ? "bg-[#1c3865] scale-110" : "bg-transparent hover:bg-[#1c3865]/20"
+                className={`w-3 h-3 md:w-3.5 md:h-3.5 rounded-full border-[1.5px] border-[#1C3865] transition-all duration-300 ${
+                  idx === currentView ? "bg-[#1C3865] scale-110" : "bg-transparent hover:bg-[#1C3865]/20"
                 }`}
                 aria-label={`Go to view ${idx + 1}`}
               />

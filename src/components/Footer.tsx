@@ -15,12 +15,12 @@ const TikTokIcon = ({ className }: { className?: string }) => (
 );
 
 const navLinks = [
-  { label: "PROJECTS | PROYECTOS", path: "/proyectos" },
-  { label: "US | NOSOTROS", path: "/nosotros" },
-  { label: "PHILOSOPHY | FILOSOFÍA", path: "/philosophy" },
-  { label: "SERVICES | SERVICIOS", path: "/services" },
-  { label: "GALLERY | GALERÍA", path: "/gallery" },
-  { label: "CONTACT | CONTACTO", path: "/contact" },
+  { label: "PROYECTOS", path: "/proyectos" },
+  { label: "NOSOTROS", path: "/nosotros" },
+  { label: "FILOSOFÍA", path: "/philosophy" },
+  { label: "SERVICIOS", path: "/services" },
+  { label: "GALERÍA", path: "/gallery" },
+  { label: "CONTACTO", path: "/contact" },
 ];
 
 export function Footer() {
@@ -31,7 +31,7 @@ export function Footer() {
   const isContactPage = location.pathname.startsWith("/contact");
 
   return (
-    <footer className={`${(isNosotrosPage || isServicesPage) ? "bg-[#000000]" : ((isProyectosPage || isContactPage) ? "bg-[#1c3865]" : "bg-footer")} text-footer-foreground border-t border-white/10 py-10`}>
+    <footer className={`${(isNosotrosPage || isServicesPage) ? "bg-[#000000]" : ((isProyectosPage || isContactPage) ? "bg-[#1C3865]" : "bg-footer")} text-footer-foreground border-t border-white/10 py-8`}>
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-8 lg:gap-6 xl:gap-8 mb-12">
           
@@ -127,9 +127,13 @@ export function Footer() {
                 </div>
                 <span className="text-xs tracking-[0.25em] uppercase font-medium">WhatsApp</span>
               </div>
-              <p className="text-white/50 text-xs font-light italic opacity-80 group-hover:opacity-100 transition-opacity max-w-[140px] text-center md:text-left leading-relaxed">
-                "¿How can we help you?"
-              </p>
+              <div className="bg-white px-4 py-2 rounded-xl transition-transform duration-300 group-hover:scale-105 shadow-lg relative">
+                <p className="text-black text-[10px] font-medium tracking-tight whitespace-nowrap">
+                  "¿En qué podemos ayudarte?"
+                </p>
+                {/* Visual arrow for the bubble */}
+                <div className="absolute -top-1 left-4 w-2 h-2 bg-white rotate-45 transform" />
+              </div>
             </a>
           </div>
 

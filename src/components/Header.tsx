@@ -5,10 +5,10 @@ import logoProyectos from "../assets/logos/logoproyectos.png";
 import logoFooter from "../assets/logos/logofooter.png";
 
 const navLinks = [
-  { label: "RAM", path: "/nosotros" },
+  { label: "NOSOTROS", path: "/nosotros" },
   { label: "SERVICIOS", path: "/services" },
   { label: "PROYECTOS", path: "/proyectos" },
-  { label: "INVESTIGACION", path: "/philosophy" },
+  { label: "FILOSOFÍA", path: "/philosophy" },
   { label: "CONTACTO", path: "/contact" },
 ];
 
@@ -44,7 +44,7 @@ export function Header() {
           isNosotrosPage
             ? "bg-[#000000] border-white/10"
             : (isProyectosPage || isContactPage)
-              ? "bg-[#1c3865] border-white/10" 
+              ? "bg-[#1C3865] border-white/10"  
               : isServicesPage
                 ? "bg-[#ffffff] border-black/5"
                 : "bg-[#fdfdfd] border-black/5"

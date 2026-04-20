@@ -56,20 +56,14 @@
   }
 
   body {
-    @apply bg-background text-foreground font-body antialiased;
+    @apply bg-background text-foreground font-body font-normal antialiased;
   }
 
-  h1 {
-    @apply font-display font-extrabold;
-  }
-  h2 {
+  h1, h2 {
     @apply font-display font-bold;
   }
-  h3 {
-    @apply font-display font-normal;
-  }
-  h4 {
-    @apply font-display font-light;
+  h3, h4 {
+    @apply font-display font-extrabold;
   }
 }
 
