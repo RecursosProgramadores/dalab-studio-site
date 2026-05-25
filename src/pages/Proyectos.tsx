@@ -49,15 +49,16 @@ function ProjectItem({ project }: { project: typeof projects[0] }) {
         loading="lazy"
       />
 
-      {/* Info Bar: Appears on Hover */}
+      {/* Info Bar: Appears on Hover (Centered bottom, white text, no background, fade & slide up) */}
       <div 
-        className="absolute bottom-0 left-0 w-full bg-black text-white p-4 transition-transform duration-500 ease-out z-20 translate-y-full group-hover:translate-y-0"
+        style={{ textShadow: "0 2px 10px rgba(0, 0, 0, 0.6)" }}
+        className="absolute bottom-6 left-0 w-full text-center px-4 transition-all duration-500 ease-out z-20 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none"
       >
-        <div className="flex flex-col space-y-0.5">
-          <h3 className="font-display font-medium text-[12px] md:text-[14px] tracking-[0.2em] uppercase">
+        <div className="flex flex-col space-y-1">
+          <h3 className="font-display font-bold text-[12px] md:text-[14px] tracking-[0.2em] uppercase text-white">
             {project.title}
           </h3>
-          <p className="text-white/70 text-[10px] md:text-[11px] font-light tracking-[0.1em] uppercase">
+          <p className="text-white/90 text-[9px] md:text-[10px] font-medium tracking-[0.15em] uppercase">
             {project.use} | {project.location}
           </p>
         </div>

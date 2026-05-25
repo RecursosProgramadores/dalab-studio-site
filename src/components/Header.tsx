@@ -21,6 +21,26 @@ export function Header() {
   const isContactPage = location.pathname.startsWith("/contact");
   const isDarkTheme = isProyectosPage || isNosotrosPage || isContactPage;
 
+  const [lang, setLang] = useState(() => {
+    return localStorage.getItem("lang") || "ES";
+  });
+
+  useEffect(() => {
+    const handleGlobalLangChange = () => {
+      setLang(localStorage.getItem("lang") || "ES");
+    };
+    window.addEventListener("languageChange", handleGlobalLangChange);
+    return () => {
+      window.removeEventListener("languageChange", handleGlobalLangChange);
+    };
+  }, []);
+
+  const handleLangChange = (newLang: string) => {
+    setLang(newLang);
+    localStorage.setItem("lang", newLang);
+    window.dispatchEvent(new Event("languageChange"));
+  };
+
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
@@ -82,8 +102,43 @@ export function Header() {
           
         </div>
 
-        {/* Right: Empty space to balance the sticky header */}
-        <div className="flex-1" />
+        {/* Right: Language Selector */}
+        <div className="flex-1 flex items-center justify-end">
+          <div className="flex items-center gap-1.5 md:gap-2 font-display text-[11px] sm:text-[13px] tracking-widest font-semibold select-none">
+            <button 
+              onClick={() => handleLangChange("EN")}
+              className={`transition-colors duration-300 uppercase py-1 ${
+                lang === "EN" 
+                  ? (isDarkTheme ? "text-white font-extrabold" : "text-[#111111] font-extrabold") 
+                  : (isDarkTheme ? "text-white/40 hover:text-white" : "text-black/40 hover:text-black")
+              }`}
+            >
+              EN
+            </button>
+            <span className={`text-[10px] ${isDarkTheme ? "text-white/20" : "text-black/20"}`}>|</span>
+            <button 
+              onClick={() => handleLangChange("ES")}
+              className={`transition-colors duration-300 uppercase py-1 ${
+                lang === "ES" 
+                  ? (isDarkTheme ? "text-white font-extrabold" : "text-[#111111] font-extrabold") 
+                  : (isDarkTheme ? "text-white/40 hover:text-white" : "text-black/40 hover:text-black")
+              }`}
+            >
+              ES
+            </button>
+            <span className={`text-[10px] ${isDarkTheme ? "text-white/20" : "text-black/20"}`}>|</span>
+            <button 
+              onClick={() => handleLangChange("IT")}
+              className={`transition-colors duration-300 uppercase py-1 ${
+                lang === "IT" 
+                  ? (isDarkTheme ? "text-white font-extrabold" : "text-[#111111] font-extrabold") 
+                  : (isDarkTheme ? "text-white/40 hover:text-white" : "text-black/40 hover:text-black")
+              }`}
+            >
+              IT
+            </button>
+          </div>
+        </div>
         
       </header>
 
@@ -118,7 +173,7 @@ export function Header() {
                 to={link.path}
                 className="group relative inline-flex flex-col items-center"
               >
-                <span className="block font-display font-light text-[18px] sm:text-[22px] md:text-[28px] text-white tracking-[0.2em] md:tracking-[0.25em] leading-[1.6] uppercase transition-all duration-300 group-hover:text-blue-600 group-hover:italic">
+                <span className="block font-display font-bold text-[15px] sm:text-[18px] md:text-[22px] text-white tracking-[0.2em] md:tracking-[0.25em] leading-[1.6] uppercase transition-all duration-300 group-hover:text-[#1C3865] group-hover:italic">
                   {link.label}
                 </span>
               </Link>

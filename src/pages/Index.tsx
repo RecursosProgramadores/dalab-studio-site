@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { PageLayout } from "@/components/PageLayout";
 import { SliderArrow } from "@/components/SliderArrow";
 
@@ -94,6 +95,48 @@ export default function Index() {
               aria-label={`Ir al video ${i + 1}`}
             />
           ))}
+        </div>
+
+        {/* Centered Typography and Action Button Overlay */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-20 px-6 pointer-events-none select-none">
+          <div className="flex flex-col items-center max-w-4xl animate-fade-in">
+            {/* TEXTO 1 with TT NORMS Typography */}
+            <h1 
+              style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
+              className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.2em] uppercase leading-none mb-1 text-shadow-md"
+            >
+              TEXTO 1
+            </h1>
+            <span 
+              style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
+              className="text-white/60 text-xs sm:text-sm md:text-base tracking-[0.3em] uppercase font-light block mb-8 sm:mb-10"
+            >
+              (tipografía TT NORMS)
+            </span>
+
+            {/* TEXTO 2 with Bahnschrift SemiBold Typography */}
+            <p 
+              style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
+              className="text-white/95 text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-wide max-w-2xl leading-normal mb-1"
+            >
+              TEXTO 2 TEXTO 2 TEXTO 2 TEXTO 2 TEXTO 2 TEXTO 2
+            </p>
+            <span 
+              style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
+              className="text-white/50 text-xs sm:text-sm md:text-base tracking-[0.2em] uppercase block mb-12 sm:mb-14"
+            >
+              (tipografía Bahnschrift SemiBol)
+            </span>
+
+            {/* Blue Brand Action Button linking to /services */}
+            <Link
+              to="/services"
+              style={{ backgroundColor: '#1C3865' }}
+              className="pointer-events-auto inline-flex items-center justify-center text-white px-10 py-3.5 sm:px-12 sm:py-4 rounded-full font-display font-semibold text-[13px] sm:text-[15px] tracking-[0.25em] uppercase transition-all duration-300 hover:bg-[#1C3865]/90 hover:scale-105 active:scale-95 shadow-[0_4px_25px_rgba(28,56,101,0.5)]"
+            >
+              Empecemos
+            </Link>
+          </div>
         </div>
         
       </div>

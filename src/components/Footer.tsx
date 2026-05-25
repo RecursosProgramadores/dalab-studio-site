@@ -15,11 +15,10 @@ const TikTokIcon = ({ className }: { className?: string }) => (
 );
 
 const navLinks = [
-  { label: "PROYECTOS", path: "/proyectos" },
   { label: "NOSOTROS", path: "/nosotros" },
-  { label: "FILOSOFÍA", path: "/philosophy" },
   { label: "SERVICIOS", path: "/services" },
-  { label: "GALERÍA", path: "/gallery" },
+  { label: "PROYECTOS", path: "/proyectos" },
+  { label: "FILOSOFÍA", path: "/philosophy" },
   { label: "CONTACTO", path: "/contact" },
 ];
 
@@ -31,9 +30,9 @@ export function Footer() {
   const isContactPage = location.pathname.startsWith("/contact");
 
   return (
-    <footer className={`${(isNosotrosPage || isServicesPage) ? "bg-[#000000]" : ((isProyectosPage || isContactPage) ? "bg-[#1C3865]" : "bg-footer")} text-footer-foreground border-t border-white/10 py-8`}>
+    <footer className={`${(isNosotrosPage || isServicesPage) ? "bg-[#000000]" : ((isProyectosPage || isContactPage) ? "bg-[#1C3865]" : "bg-footer")} text-footer-foreground border-t border-white/10 py-5`}>
       <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-8 lg:gap-6 xl:gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-6 lg:gap-4 xl:gap-6 mb-8">
           
           {/* Brand/Logo Section */}
           <div className="flex flex-col items-center md:items-start">
@@ -69,9 +68,8 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Contact Section */}
           <div className="flex flex-col items-center md:items-start pt-1">
-            <div className="flex flex-col items-center md:items-start w-full mb-8">
+            <div className="flex flex-col items-center md:items-start w-full mb-4">
               <a 
                 href="mailto:grupoirema@gmail.com" 
                 className="flex items-center gap-4 text-white/50 hover:text-white transition-colors duration-300 text-xs tracking-wider group"
@@ -111,7 +109,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="flex flex-col items-center md:items-start group"
             >
-              <div className="flex items-center gap-4 text-white/50 group-hover:text-white transition-colors mb-5">
+              <div className="flex items-center gap-4 text-white/50 group-hover:text-white transition-colors mb-3">
                 <div className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-colors">
                   <div 
                     className="w-4.5 h-4.5 bg-white group-hover:bg-white transition-colors"
@@ -140,7 +138,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="border-t border-white/10 pt-5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-white/40 text-xs font-light tracking-wider text-center md:text-left">
             &copy; {new Date().getFullYear()} RAM Diseño Arquitectura. Todos los derechos reservados.
           </p>

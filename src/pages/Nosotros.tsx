@@ -37,6 +37,29 @@ const flowSteps = [
   "CONSTRUCCIÓN"
 ];
 
+const valuesList = [
+  {
+    title: "INNOVACIÓN",
+    description: "Desafiamos los límites del diseño para concebir soluciones arquitectónicas únicas, combinando tecnología de vanguardia y creatividad sin límites."
+  },
+  {
+    title: "SOSTENIBILIDAD",
+    description: "Proyectamos con conciencia ecológica, optimizando el uso de recursos y diseñando espacios de bajo impacto ambiental y alta durabilidad."
+  },
+  {
+    title: "EXCELENCIA",
+    description: "Buscamos la perfección técnica en cada detalle, desde la precisión conceptual hasta la impecable materialización en obra."
+  },
+  {
+    title: "FUNCIONALIDAD",
+    description: "Priorizamos el bienestar humano, creando espacios donde la lógica de la función y la belleza estética conviven en perfecto equilibrio."
+  },
+  {
+    title: "INTEGRIDAD",
+    description: "Construimos relaciones basadas en la honestidad, la transparencia y el estricto cumplimiento de presupuestos, plazos y objetivos trazados."
+  }
+];
+
 export default function Nosotros() {
   return (
     <PageLayout>
@@ -107,6 +130,54 @@ export default function Nosotros() {
                     {member.bio}
                   </p>
                 </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Section: NUESTROS VALORES */}
+        <section className="py-24 px-6 lg:px-12 bg-[#000000] border-t border-white/5">
+          <h2 className="tracking-[0.3em] font-display font-light text-white uppercase text-center mb-16 text-lg md:text-xl">
+            NUESTROS VALORES
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+            {valuesList.map((val, index) => (
+              <div 
+                key={index}
+                className="flex flex-col items-center justify-between text-center bg-transparent border border-white/10 rounded-[2.5rem] p-8 min-h-[380px] transition-all duration-300 hover:border-white/30 hover:bg-white/[0.02]"
+              >
+                {/* Top: Value Title and Font specification text */}
+                <div className="flex flex-col items-center w-full">
+                  <span 
+                    style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
+                    className="text-white text-base md:text-lg tracking-wider font-bold uppercase block"
+                  >
+                    {val.title}
+                  </span>
+                  <span 
+                    style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
+                    className="text-white/40 text-[9px] tracking-[0.2em] uppercase font-light mt-1 block"
+                  >
+                    (tipografía TT NORMS)
+                  </span>
+                </div>
+
+                {/* Middle: Description */}
+                <p 
+                  style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
+                  className="text-white/80 text-[12px] leading-[2] my-6 font-semibold"
+                >
+                  {val.description}
+                </p>
+
+                {/* Bottom: Font specification text */}
+                <span 
+                  style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
+                  className="text-white/30 text-[9px] tracking-[0.15em] uppercase font-semibold block"
+                >
+                  (tipografía Bahnschrift SemiBol)
+                </span>
               </div>
             ))}
           </div>

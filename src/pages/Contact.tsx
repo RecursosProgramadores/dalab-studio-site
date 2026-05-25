@@ -34,9 +34,9 @@ export default function Contact() {
                 </a>
 
                 <a href="https://wa.me/51968263462" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group w-fit">
-                  <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group-hover:bg-white/10 group-hover:border-white">
+                  <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group-hover:bg-white group-hover:border-white">
                     <div 
-                      className="w-5 h-5 bg-white transition-colors"
+                      className="w-5 h-5 bg-white group-hover:bg-[#1C3865] transition-colors"
                       style={{
                         maskImage: `url(${whatsappIcon})`,
                         WebkitMaskImage: `url(${whatsappIcon})`,
@@ -96,10 +96,10 @@ export default function Contact() {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124864.84656689408!2d-77.10091811654817!3d-12.043597086884323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c5f619ee3ec7%3A0x14206cb9cc452e4a!2sLima%2C%20Peru!5e0!3m2!1sen!2sus!4v1710860548123!5m2!1sen!2sus" 
               className="absolute inset-0 w-full h-full border-0 transition-all duration-[1s] ease-in-out"
               style={{
-                filter: 'grayscale(1) sepia(1) hue-rotate(180deg) saturate(4) brightness(0.9) contrast(1.1)',
+                filter: 'grayscale(1) sepia(0.6) hue-rotate(190deg) saturate(3) brightness(0.9) contrast(1.1)',
               }}
               onMouseEnter={(e) => (e.currentTarget.style.filter = 'grayscale(1) brightness(0.9) contrast(1.1)')}
-              onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(1) sepia(1) hue-rotate(180deg) saturate(4) brightness(0.9) contrast(1.1)')}
+              onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(1) sepia(0.6) hue-rotate(190deg) saturate(3) brightness(0.9) contrast(1.1)')}
               allowFullScreen={false} 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"

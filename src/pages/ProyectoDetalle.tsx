@@ -93,11 +93,23 @@ export default function ProyectoDetalle() {
             alt={`Portada de ${project.title}`} 
             className="w-full h-full object-cover" 
           />
-          {/* Título flotante sutil (elegancia arquitectónica) */}
-          <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 z-10 bg-white/95 backdrop-blur-sm px-6 py-3 border border-black/5 shadow-sm">
-            <h1 className="font-serif text-lg md:text-xl tracking-[0.2em] text-[#111]">
+          {/* Título flotante sutil (elegancia arquitectónica sin fondo y estilo TEXTO 1 TT Norms) */}
+          <div 
+            style={{ textShadow: "0 2px 10px rgba(0, 0, 0, 0.6)" }}
+            className="absolute bottom-6 left-6 md:bottom-10 md:left-10 z-10 select-none pointer-events-none"
+          >
+            <h1 
+              style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
+              className="text-white text-3xl sm:text-4xl md:text-5xl font-bold tracking-[0.2em] uppercase leading-none mb-1"
+            >
               {project.title}
             </h1>
+            <span 
+              style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
+              className="text-white/60 text-[10px] md:text-xs tracking-[0.3em] uppercase font-light block"
+            >
+              (tipografía TT NORMS)
+            </span>
           </div>
         </div>
 
@@ -111,31 +123,31 @@ export default function ProyectoDetalle() {
             <span className="font-medium text-black">({currentView + 1}/{project.views.length})</span>
           </div>
 
-          {/* Left Arrow Button */}
+          {/* Left Arrow Button (Reduced to half size) */}
           <button 
             onClick={prevView}
-            className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#1C3865] flex items-center justify-center text-white opacity-80 hover:opacity-100 transition-opacity shadow-lg"
+            className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-30 w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#1C3865] flex items-center justify-center text-white opacity-80 hover:opacity-100 transition-opacity shadow-md"
             aria-label="Previous view"
           >
-            <MoveLeft className="w-6 h-6 md:w-8 md:h-8" strokeWidth={1} />
+            <MoveLeft className="w-3 h-3 md:w-4 md:h-4" strokeWidth={1.5} />
           </button>
 
-          {/* Right Arrow Button */}
+          {/* Right Arrow Button (Reduced to half size) */}
           <button 
             onClick={nextView}
-            className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#1C3865] flex items-center justify-center text-white opacity-80 hover:opacity-100 transition-opacity shadow-lg"
+            className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-30 w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#1C3865] flex items-center justify-center text-white opacity-80 hover:opacity-100 transition-opacity shadow-md"
             aria-label="Next view"
           >
-            <MoveRight className="w-6 h-6 md:w-8 md:h-8" strokeWidth={1} />
+            <MoveRight className="w-3 h-3 md:w-4 md:h-4" strokeWidth={1.5} />
           </button>
 
-          {/* Dots Pagination */}
-          <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 md:gap-4 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
+          {/* Dots Pagination (Reduced to half size) */}
+          <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 md:gap-2 bg-white/50 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-sm">
             {project.views.map((_, idx) => (
               <button
                 key={idx}
                 onClick={(e) => { e.stopPropagation(); setCurrentView(idx); }}
-                className={`w-3 h-3 md:w-3.5 md:h-3.5 rounded-full border-[1.5px] border-[#1C3865] transition-all duration-300 ${
+                className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full border-[1px] border-[#1C3865] transition-all duration-300 ${
                   idx === currentView ? "bg-[#1C3865] scale-110" : "bg-transparent hover:bg-[#1C3865]/20"
                 }`}
                 aria-label={`Go to view ${idx + 1}`}
