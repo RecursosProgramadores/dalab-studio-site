@@ -18,7 +18,7 @@ const navLinks = [
   { label: "NOSOTROS", path: "/nosotros" },
   { label: "SERVICIOS", path: "/services" },
   { label: "PROYECTOS", path: "/proyectos" },
-  { label: "FILOSOFÍA", path: "/philosophy" },
+  { label: "INVESTIGACIÓN", path: "/investigacion" },
   { label: "CONTACTO", path: "/contact" },
 ];
 
@@ -28,9 +28,10 @@ export function Footer() {
   const isNosotrosPage = location.pathname.startsWith("/nosotros");
   const isServicesPage = location.pathname.startsWith("/services");
   const isContactPage = location.pathname.startsWith("/contact");
+  const isInvestigacionSubPage = location.pathname.startsWith("/investigacion") && location.pathname !== "/investigacion";
 
   return (
-    <footer className={`${(isNosotrosPage || isServicesPage) ? "bg-[#000000]" : ((isProyectosPage || isContactPage) ? "bg-[#1C3865]" : "bg-footer")} text-footer-foreground border-t border-white/10 py-5`}>
+    <footer className={`${(isNosotrosPage || isServicesPage) ? "bg-[#000000]" : ((isProyectosPage || isContactPage || isInvestigacionSubPage) ? "bg-[#1C3865]" : "bg-footer")} text-footer-foreground border-t border-white/10 py-5`}>
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-6 lg:gap-4 xl:gap-6 mb-8">
           

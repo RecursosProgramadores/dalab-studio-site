@@ -8,7 +8,7 @@ const navLinks = [
   { label: "NOSOTROS", path: "/nosotros" },
   { label: "SERVICIOS", path: "/services" },
   { label: "PROYECTOS", path: "/proyectos" },
-  { label: "FILOSOFÍA", path: "/philosophy" },
+  { label: "INVESTIGACIÓN", path: "/investigacion" },
   { label: "CONTACTO", path: "/contact" },
 ];
 
@@ -19,7 +19,8 @@ export function Header() {
   const isNosotrosPage = location.pathname.startsWith("/nosotros");
   const isServicesPage = location.pathname.startsWith("/services");
   const isContactPage = location.pathname.startsWith("/contact");
-  const isDarkTheme = isProyectosPage || isNosotrosPage || isContactPage;
+  const isInvestigacionSubPage = location.pathname.startsWith("/investigacion") && location.pathname !== "/investigacion";
+  const isDarkTheme = isProyectosPage || isNosotrosPage || isContactPage || isInvestigacionSubPage;
 
   const [lang, setLang] = useState(() => {
     return localStorage.getItem("lang") || "ES";
@@ -63,7 +64,7 @@ export function Header() {
         className={`sticky top-0 z-40 w-full flex items-center justify-between px-6 md:px-12 py-2 lg:py-2.5 transition-all duration-300 border-b ${
           isNosotrosPage
             ? "bg-[#000000] border-white/10"
-            : (isProyectosPage || isContactPage)
+            : (isProyectosPage || isContactPage || isInvestigacionSubPage)
               ? "bg-[#1C3865] border-white/10"  
               : isServicesPage
                 ? "bg-[#ffffff] border-black/5"
@@ -94,7 +95,7 @@ export function Header() {
           />
           
           <img 
-            src={isNosotrosPage ? logoFooter : ((isProyectosPage || isContactPage) ? logoProyectos : logoImg)} 
+            src={isNosotrosPage ? logoFooter : ((isProyectosPage || isContactPage || isInvestigacionSubPage) ? logoProyectos : logoImg)} 
             alt="RAM Diseño Arquitectura" 
             className="w-[90px] sm:w-[110px] md:w-[130px] h-auto transition-opacity duration-[1.5s] ease-in-out" 
             loading="eager"

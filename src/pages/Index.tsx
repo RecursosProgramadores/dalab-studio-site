@@ -84,7 +84,7 @@ export default function Index() {
         </div>
 
         {/* Puntos (Dots) de Navegación Inferior */}
-        <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex gap-3 md:gap-4 z-20">
+        <div className="absolute bottom-16 md:bottom-24 left-1/2 -translate-x-1/2 flex gap-3 md:gap-4 z-20">
           {Array.from({ length: slideCount }).map((_, i) => (
             <button
               key={i}
@@ -98,35 +98,23 @@ export default function Index() {
         </div>
 
         {/* Centered Typography and Action Button Overlay */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-20 px-6 pointer-events-none select-none">
+        <div className="absolute inset-0 flex flex-col items-center justify-start text-center z-20 px-6 pt-[53vh] md:pt-[55vh] pointer-events-none select-none">
           <div className="flex flex-col items-center max-w-4xl animate-fade-in">
             {/* TEXTO 1 with TT NORMS Typography */}
             <h1 
               style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
-              className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.2em] uppercase leading-none mb-1 text-shadow-md"
+              className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[0.2em] uppercase leading-none mb-1 text-shadow-md"
             >
-              TEXTO 1
+              DISEÑO ATEMPORAL
             </h1>
-            <span 
-              style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
-              className="text-white/60 text-xs sm:text-sm md:text-base tracking-[0.3em] uppercase font-light block mb-8 sm:mb-10"
-            >
-              (tipografía TT NORMS)
-            </span>
 
             {/* TEXTO 2 with Bahnschrift SemiBold Typography */}
             <p 
               style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
-              className="text-white/95 text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-wide max-w-2xl leading-normal mb-1"
+              className="text-white/95 text-base sm:text-lg md:text-xl lg:text-2xl tracking-wide max-w-2xl leading-normal mb-1"
             >
-              TEXTO 2 TEXTO 2 TEXTO 2 TEXTO 2 TEXTO 2 TEXTO 2
+              Creamos espacios sofisticados que fusionan el arte, la técnica y el lujo atemporal.
             </p>
-            <span 
-              style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
-              className="text-white/50 text-xs sm:text-sm md:text-base tracking-[0.2em] uppercase block mb-12 sm:mb-14"
-            >
-              (tipografía Bahnschrift SemiBol)
-            </span>
 
             {/* Blue Brand Action Button linking to /services */}
             <Link

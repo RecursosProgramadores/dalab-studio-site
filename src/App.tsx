@@ -7,7 +7,9 @@ import Index from "./pages/Index";
 import Proyectos from "./pages/Proyectos";
 import ProyectoDetalle from "./pages/ProyectoDetalle";
 import Nosotros from "./pages/Nosotros";
-import Philosophy from "./pages/Philosophy";
+import Investigacion from "./pages/Investigacion";
+import InvestigacionCategory from "./pages/InvestigacionCategory";
+import InvestigacionDetail from "./pages/InvestigacionDetail";
 import Services from "./pages/Services";
 import ServiceDetail from "./pages/ServiceDetail";
 import Gallery from "./pages/Gallery";
@@ -29,7 +31,9 @@ const App = () => (
           <Route path="/proyectos" element={<Proyectos />} />
           <Route path="/proyectos/:slug" element={<ProyectoDetalle />} />
           <Route path="/nosotros" element={<Nosotros />} />
-          <Route path="/philosophy" element={<Philosophy />} />
+          <Route path="/investigacion" element={<Investigacion />} />
+          <Route path="/investigacion/:category" element={<InvestigacionCategory />} />
+          <Route path="/investigacion/:category/:slug" element={<InvestigacionDetail />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:id" element={<ServiceDetail />} />
           <Route path="/gallery" element={<Gallery />} />

@@ -96,17 +96,15 @@ export default function Contact() {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124864.84656689408!2d-77.10091811654817!3d-12.043597086884323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c5f619ee3ec7%3A0x14206cb9cc452e4a!2sLima%2C%20Peru!5e0!3m2!1sen!2sus!4v1710860548123!5m2!1sen!2sus" 
               className="absolute inset-0 w-full h-full border-0 transition-all duration-[1s] ease-in-out"
               style={{
-                filter: 'grayscale(1) sepia(0.6) hue-rotate(190deg) saturate(3) brightness(0.9) contrast(1.1)',
+                filter: 'grayscale(1) brightness(1.2) contrast(1.2)',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.filter = 'grayscale(1) brightness(0.9) contrast(1.1)')}
-              onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(1) sepia(0.6) hue-rotate(190deg) saturate(3) brightness(0.9) contrast(1.1)')}
               allowFullScreen={false} 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
               title="Ubicación del Estudio"
             />
-            {/* Subtle Overlay to enhance the blue scale effect */}
-            <div className="absolute inset-0 bg-[#1C3865]/10 pointer-events-none group-hover:opacity-0 transition-opacity duration-1000" />
+            {/* Subtle Overlay to enhance the brand blue & white effect */}
+            <div className="absolute inset-0 bg-[#1C3865]/20 pointer-events-none group-hover:bg-[#1C3865]/0 transition-all duration-1000" />
           </div>
 
         </div>

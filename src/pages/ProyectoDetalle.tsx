@@ -16,7 +16,7 @@ const PROJECTS_DATA: Record<
   string,
   {
     title: string;
-    cover: string;
+    covers: string[];
     views: string[];
     description?: string[];
     details?: { label: string; value: string }[];
@@ -24,7 +24,7 @@ const PROJECTS_DATA: Record<
 > = {
   "casa-aurora": {
     title: "CASA AURORA",
-    cover: portadaImg,
+    covers: [portadaImg, vista1Img, vista2Img],
     views: [vista1Img, vista2Img, vista3Img],
     description: [
       "The new Radio Télévision Suisse (RTS) headquarters is situated on the campus of EPFL and UNIL universities, next to the Learning Centre on the shores of Lake Geneva. Functioning as both a broadcasting centre and a public venue with educational and research facilities, the building is conceived as a factory that combines technical performance with civic presence. Its ability to adapt to the emerging technologies and changing formats of media production is facilitated by the introduction of two distinct spatial figures: a box and a field. In essence, the building is formed by four independent rectangular ‘boxes’ of varying sizes that support a curvilinear slab suspended 8m above the permeable ground floor. The glazed foyer positioned between three of the boxes encloses the main entrance with its central staircase and divides the public area with a restaurant and café from the logistics area with technical facilities and a garage for production trucks. Each of these compact rectangular volumes is dedicated to a different purpose: to broadcasting and recording studios, technical and educational facilities, and administrative offices. In turn, the double-height suspended slab is designed as an open-plan ‘field’ of offices and production spaces, with flexible workplace configurations. This continuous interior is lit by a shed roof and intersected by Warren trusses that span between the volumes, organising different areas with their distinctive structure and colour patterning. In its complexity and quasi-urban configuration created by furniture and protruding boxes, the field is a collective space that reproduces the sprawling university campus."
@@ -52,7 +52,7 @@ const PROJECTS_DATA: Record<
   },
   "default": {
     title: "PROYECTO DESCONOCIDO",
-    cover: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=2000",
+    covers: ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=2000"],
     views: [
       "https://images.unsplash.com/photo-1600607687930-cebc5a7aba59?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000"
@@ -63,6 +63,7 @@ const PROJECTS_DATA: Record<
 export default function ProyectoDetalle() {
   const { slug } = useParams();
   const [currentView, setCurrentView] = useState(0);
+  const [currentCover, setCurrentCover] = useState(0);
 
   // Busca el proyecto por su slug, si no existe usa el "default"
   const project = PROJECTS_DATA[slug || ""] || PROJECTS_DATA["default"];
@@ -77,6 +78,16 @@ export default function ProyectoDetalle() {
     setCurrentView((prev) => (prev - 1 + project.views.length) % project.views.length);
   };
 
+  const nextCover = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setCurrentCover((prev) => (prev + 1) % project.covers.length);
+  };
+
+  const prevCover = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setCurrentCover((prev) => (prev - 1 + project.covers.length) % project.covers.length);
+  };
+
   return (
     <PageLayout>
       {/* 
@@ -86,21 +97,79 @@ export default function ProyectoDetalle() {
       */}
       <div className="w-full flex flex-col md:flex-row h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] lg:h-[calc(100vh-7rem)] bg-white overflow-hidden">
         
-        {/* LADO IZQUIERDO: Imagen Portada (Fija) */}
-        <div className="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden bg-white">
-          <img 
-            src={project.cover} 
-            alt={`Portada de ${project.title}`} 
-            className="w-full h-full object-cover" 
-          />
+        {/* LADO IZQUIERDO: Visor Interactivo de Renders/Portada (slideshow) */}
+        <div className="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden bg-white group/left border-b md:border-b-0 md:border-r border-black/5">
+          
+          {/* Indicador de número de vistas superior izquierdo (Opcional) */}
+          <div className="absolute top-4 left-6 md:top-8 md:left-10 z-20 font-sans text-[9px] md:text-[11px] tracking-[0.3em] uppercase text-white/40 group-hover/left:text-white/70 transition-colors duration-300 flex items-center gap-2">
+            <span>Render</span>
+            <span className="font-medium text-white/90">({currentCover + 1}/{project.covers.length})</span>
+          </div>
+
+          {/* Left Arrow Button for Cover Slideshow */}
+          {project.covers.length > 1 && (
+            <button 
+              onClick={prevCover}
+              className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-30 w-6 h-6 md:w-8 md:h-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white opacity-0 group-hover/left:opacity-80 hover:group-hover/left:opacity-100 transition-all duration-300 shadow-md"
+              aria-label="Previous render"
+            >
+              <MoveLeft className="w-3 h-3 md:w-4 md:h-4" strokeWidth={1.5} />
+            </button>
+          )}
+
+          {/* Right Arrow Button for Cover Slideshow */}
+          {project.covers.length > 1 && (
+            <button 
+              onClick={nextCover}
+              className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-30 w-6 h-6 md:w-8 md:h-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white opacity-0 group-hover/left:opacity-80 hover:group-hover/left:opacity-100 transition-all duration-300 shadow-md"
+              aria-label="Next render"
+            >
+              <MoveRight className="w-3 h-3 md:w-4 md:h-4" strokeWidth={1.5} />
+            </button>
+          )}
+
+          {/* Dots Pagination for Cover Slideshow */}
+          {project.covers.length > 1 && (
+            <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 md:gap-2 bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-sm">
+              {project.covers.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={(e) => { e.stopPropagation(); setCurrentCover(idx); }}
+                  className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full border-[1px] border-white transition-all duration-300 ${
+                    idx === currentCover ? "bg-white scale-110" : "bg-transparent hover:bg-white/20"
+                  }`}
+                  aria-label={`Go to render ${idx + 1}`}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Transición de las portadas (fade-in) */}
+          {project.covers.map((src, index) => (
+            <div 
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                index === currentCover ? "opacity-100 z-0" : "opacity-0 -z-10"
+              }`}
+            >
+              <img 
+                src={src} 
+                alt={`Render ${index + 1} de ${project.title}`} 
+                className="w-full h-full object-cover grayscale opacity-90" 
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-black/35" />
+            </div>
+          ))}
+
           {/* Título flotante sutil (elegancia arquitectónica sin fondo y estilo TEXTO 1 TT Norms) */}
           <div 
             style={{ textShadow: "0 2px 10px rgba(0, 0, 0, 0.6)" }}
-            className="absolute bottom-6 left-6 md:bottom-10 md:left-10 z-10 select-none pointer-events-none"
+            className="absolute bottom-6 left-6 md:bottom-10 md:left-10 z-10 select-none pointer-events-none pr-6"
           >
             <h1 
               style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
-              className="text-white text-3xl sm:text-4xl md:text-5xl font-bold tracking-[0.2em] uppercase leading-none mb-1"
+              className="text-white text-3xl sm:text-4xl md:text-5xl font-bold tracking-[0.2em] uppercase leading-[1.2] mb-1"
             >
               {project.title}
             </h1>
@@ -111,6 +180,7 @@ export default function ProyectoDetalle() {
               (tipografía TT NORMS)
             </span>
           </div>
+
         </div>
 
         {/* LADO DERECHO: Visor Interactivo de Planos/Vistas */}
