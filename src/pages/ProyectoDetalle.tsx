@@ -62,30 +62,71 @@ const PROJECTS_DATA: Record<
 
 export default function ProyectoDetalle() {
   const { slug } = useParams();
+  const project = PROJECTS_DATA[slug || ""] || PROJECTS_DATA["default"];
+
   const [currentView, setCurrentView] = useState(0);
   const [currentCover, setCurrentCover] = useState(0);
 
-  // Busca el proyecto por su slug, si no existe usa el "default"
-  const project = PROJECTS_DATA[slug || ""] || PROJECTS_DATA["default"];
-
-  const nextView = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
+  const nextView = (e?: React.MouseEvent | React.TouchEvent) => {
+    if (e && 'stopPropagation' in e) e.stopPropagation();
     setCurrentView((prev) => (prev + 1) % project.views.length);
   };
 
-  const prevView = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
+  const prevView = (e?: React.MouseEvent | React.TouchEvent) => {
+    if (e && 'stopPropagation' in e) e.stopPropagation();
     setCurrentView((prev) => (prev - 1 + project.views.length) % project.views.length);
   };
 
-  const nextCover = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
+  const nextCover = (e?: React.MouseEvent | React.TouchEvent) => {
+    if (e && 'stopPropagation' in e) e.stopPropagation();
     setCurrentCover((prev) => (prev + 1) % project.covers.length);
   };
 
-  const prevCover = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
+  const prevCover = (e?: React.MouseEvent | React.TouchEvent) => {
+    if (e && 'stopPropagation' in e) e.stopPropagation();
     setCurrentCover((prev) => (prev - 1 + project.covers.length) % project.covers.length);
+  };
+
+  // Touch Swipe Handlers for Left Visor (Covers)
+  const [touchStartLeft, setTouchStartLeft] = useState<number | null>(null);
+  const [touchEndLeft, setTouchEndLeft] = useState<number | null>(null);
+
+  const handleTouchStartLeft = (e: React.TouchEvent) => {
+    setTouchStartLeft(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMoveLeft = (e: React.TouchEvent) => {
+    setTouchEndLeft(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEndLeft = () => {
+    if (!touchStartLeft || !touchEndLeft) return;
+    const distance = touchStartLeft - touchEndLeft;
+    if (distance > 50) nextCover();
+    if (distance < -50) prevCover();
+    setTouchStartLeft(null);
+    setTouchEndLeft(null);
+  };
+
+  // Touch Swipe Handlers for Right Visor (Views)
+  const [touchStartRight, setTouchStartRight] = useState<number | null>(null);
+  const [touchEndRight, setTouchEndRight] = useState<number | null>(null);
+
+  const handleTouchStartRight = (e: React.TouchEvent) => {
+    setTouchStartRight(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMoveRight = (e: React.TouchEvent) => {
+    setTouchEndRight(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEndRight = () => {
+    if (!touchStartRight || !touchEndRight) return;
+    const distance = touchStartRight - touchEndRight;
+    if (distance > 50) nextView();
+    if (distance < -50) prevView();
+    setTouchStartRight(null);
+    setTouchEndRight(null);
   };
 
   return (
@@ -98,7 +139,12 @@ export default function ProyectoDetalle() {
       <div className="w-full flex flex-col md:flex-row h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] lg:h-[calc(100vh-7rem)] bg-white overflow-hidden">
         
         {/* LADO IZQUIERDO: Visor Interactivo de Renders/Portada (slideshow) */}
-        <div className="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden bg-white group/left border-b md:border-b-0 md:border-r border-black/5">
+        <div 
+          onTouchStart={handleTouchStartLeft}
+          onTouchMove={handleTouchMoveLeft}
+          onTouchEnd={handleTouchEndLeft}
+          className="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden bg-white group/left border-b md:border-b-0 md:border-r border-black/5 touch-pan-y"
+        >
           
           {/* Indicador de número de vistas superior izquierdo (Opcional) */}
           <div className="absolute top-4 left-6 md:top-8 md:left-10 z-20 font-sans text-[9px] md:text-[11px] tracking-[0.3em] uppercase text-white/40 group-hover/left:text-white/70 transition-colors duration-300 flex items-center gap-2">
@@ -185,7 +231,10 @@ export default function ProyectoDetalle() {
 
         {/* LADO DERECHO: Visor Interactivo de Planos/Vistas */}
         <div 
-          className="w-full md:w-1/2 h-1/2 md:h-full relative bg-[#fdfdfd] overflow-hidden group"
+          onTouchStart={handleTouchStartRight}
+          onTouchMove={handleTouchMoveRight}
+          onTouchEnd={handleTouchEndRight}
+          className="w-full md:w-1/2 h-1/2 md:h-full relative bg-[#fdfdfd] overflow-hidden group touch-pan-y"
         >
           {/* Indicador de número de vistas superior derecho (Opcional, mantenido por elegancia) */}
           <div className="absolute top-4 right-6 md:top-8 md:right-10 z-20 font-sans text-[9px] md:text-[11px] tracking-[0.3em] uppercase text-black/30 group-hover:text-black/60 transition-colors duration-300 flex items-center gap-2">

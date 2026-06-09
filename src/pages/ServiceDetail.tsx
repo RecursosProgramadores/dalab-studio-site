@@ -170,37 +170,58 @@ function WorkflowSection({ steps }: { steps: any[] }) {
         ETAPAS DE LA ESPECIALIDAD
       </h2>
 
+      {activeStepIndex === null && (
+        <div className="w-full flex justify-center mb-10">
+          <div className="bg-white border border-black/15 px-6 py-2.5 rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.02)]">
+            <span className="font-display font-bold text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-black/60 pl-[0.25em]">
+              TIPO DE INTERVENCIÓN
+            </span>
+          </div>
+        </div>
+      )}
+
       {activeStepIndex === null ? (
         /* Default View: Clickable Grid Row centered based on length */
-        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${steps.length === 4 ? "xl:grid-cols-4 max-w-5xl" : "xl:grid-cols-6 max-w-7xl"} gap-4 w-full mx-auto`}>
-          {steps.map((step, index) => (
-            <div 
-              key={index}
-              onClick={() => setActiveStepIndex(index)}
-              className="flex flex-col items-center justify-start text-center bg-[#000000] rounded-[2rem] px-5 py-12 min-h-[440px] md:min-h-[480px] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] group select-none animate-fade-in cursor-pointer border-2 border-transparent hover:border-white/10"
-            >
-              {/* Top: Step Title */}
-              <h4 
-                style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
-                className="text-white text-sm md:text-base tracking-[0.15em] font-bold uppercase mb-8 transition-transform duration-300 group-hover:scale-105"
-              >
-                {step.title}
-              </h4>
-              
-              {/* Middle: Step Description */}
-              <p 
-                style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
-                className="text-white/80 text-[11px] md:text-[12px] leading-[2.2] font-semibold text-center"
-              >
-                {step.description}
-              </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 max-w-5xl gap-6 w-full mx-auto">
+          {steps.map((step, index) => {
+            const interventionLabels = ["OBRA NUEVA", "AMPLIACIÓN", "REMODELACIÓN", "ACONDICIONAMIENTO"];
+            return (
+              <div key={index} className="flex flex-col items-center w-full">
+                <div className="flex flex-col items-center gap-2 mb-4 animate-fade-in w-full">
+                  <div className="bg-white border border-black/15 px-4 py-2 text-black font-display font-bold text-[9px] sm:text-[10px] tracking-[0.2em] uppercase shadow-[0_4px_10px_rgba(0,0,0,0.02)] text-center min-w-[170px] select-none">
+                    {interventionLabels[index]}
+                  </div>
+                  <div className="text-black/35 text-xs font-bold leading-none select-none">&darr;</div>
+                </div>
 
-              {/* Micro-interaction indicator at bottom */}
-              <div className="mt-auto pt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1.5 text-white/50 text-[10px] tracking-[0.2em] uppercase font-bold">
-                VER MÁS <span className="text-xs">&rarr;</span>
+                <div 
+                  onClick={() => setActiveStepIndex(index)}
+                  className="flex flex-col items-center justify-start text-center bg-[#000000] rounded-[2rem] px-5 py-12 min-h-[440px] md:min-h-[480px] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] group select-none animate-fade-in cursor-pointer border-2 border-transparent hover:border-white/10 w-full"
+                >
+                  {/* Top: Step Title */}
+                  <h4 
+                    style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
+                    className="text-white text-sm md:text-base tracking-[0.15em] font-bold uppercase mb-8 transition-transform duration-300 group-hover:scale-105"
+                  >
+                    {step.title}
+                  </h4>
+                  
+                  {/* Middle: Step Description */}
+                  <p 
+                    style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
+                    className="text-white/80 text-[11px] md:text-[12px] leading-[2.2] font-semibold text-center"
+                  >
+                    {step.description}
+                  </p>
+
+                  {/* Micro-interaction indicator at bottom */}
+                  <div className="mt-auto pt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1.5 text-white/50 text-[10px] tracking-[0.2em] uppercase font-bold">
+                    VER MÁS <span className="text-xs">&rarr;</span>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       ) : (
         /* Expanded Detail View: Dynamic Split Layout with Top Navigation */
@@ -339,12 +360,86 @@ function WorkflowSection({ steps }: { steps: any[] }) {
   );
 }
 
+function GerenciaMethodology() {
+  return (
+    <section className="w-full bg-[#FAFAFA] py-24 px-6 md:px-12 flex flex-col items-center border-t border-black/5 select-none">
+      <div className="w-full max-w-4xl mx-auto flex flex-col items-center">
+        {/* Title */}
+        <h2 className="font-display font-extrabold text-[#111111] text-xs md:text-sm tracking-[0.4em] uppercase text-center mb-16 select-none">
+          METODOLOGÍA DE GERENCIA
+        </h2>
+        
+        {/* Main description card */}
+        <div className="bg-white border border-black/10 rounded-[2rem] p-8 md:p-12 shadow-[0_15px_35px_rgba(0,0,0,0.03)] hover:border-black/25 transition-all duration-500 w-full mb-12">
+          <p 
+            style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
+            className="text-black/80 text-sm md:text-base leading-[2.2] font-semibold text-center max-w-3xl mx-auto"
+          >
+            Nuestra metodología de gerencia y supervisión se centra en la optimización integral del proyecto. No trabajamos por etapas lineales, sino mediante un proceso continuo de control de calidad, mitigación de riesgos y fiscalización técnica de obra para asegurar el cumplimiento del cronograma, presupuesto y la calidad del proyecto.
+          </p>
+        </div>
+
+        {/* 3 Pillars Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+          <div className="bg-white border border-black/10 rounded-[2rem] p-8 flex flex-col items-center text-center hover:shadow-[0_10px_25px_rgba(0,0,0,0.03)] hover:border-black/25 transition-all duration-300">
+            <div className="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center mb-5 text-[#1C3865] font-bold text-xs select-none">1</div>
+            <h4 
+              style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
+              className="font-bold text-xs md:text-sm tracking-wider uppercase mb-3 text-black"
+            >
+              Control Financiero
+            </h4>
+            <p 
+              style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
+              className="text-black/70 text-[11px] leading-[1.8] font-semibold"
+            >
+              Auditoría y control estricto de presupuestos, metrados y valorizaciones para evitar cualquier desviación económica.
+            </p>
+          </div>
+
+          <div className="bg-white border border-black/10 rounded-[2rem] p-8 flex flex-col items-center text-center hover:shadow-[0_10px_25px_rgba(0,0,0,0.03)] hover:border-black/25 transition-all duration-300">
+            <div className="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center mb-5 text-[#1C3865] font-bold text-xs select-none">2</div>
+            <h4 
+              style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
+              className="font-bold text-xs md:text-sm tracking-wider uppercase mb-3 text-black"
+            >
+              Supervisión de Plazos
+            </h4>
+            <p 
+              style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
+              className="text-black/70 text-[11px] leading-[1.8] font-semibold"
+            >
+              Seguimiento riguroso de la ruta crítica y cronogramas Gantt de obra para asegurar la entrega en la fecha acordada.
+            </p>
+          </div>
+
+          <div className="bg-white border border-black/10 rounded-[2rem] p-8 flex flex-col items-center text-center hover:shadow-[0_10px_25px_rgba(0,0,0,0.03)] hover:border-black/25 transition-all duration-300">
+            <div className="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center mb-5 text-[#1C3865] font-bold text-xs select-none">3</div>
+            <h4 
+              style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
+              className="font-bold text-xs md:text-sm tracking-wider uppercase mb-3 text-black"
+            >
+              Aseguramiento de Calidad
+            </h4>
+            <p 
+              style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
+              className="text-black/70 text-[11px] leading-[1.8] font-semibold"
+            >
+              Fiscalización constante en campo de procesos constructivos y materiales para certificar el estándar de alta gama.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 export default function ServiceDetail() {
   const { id } = useParams();
 
   if (!id) return <Navigate to="/services" replace />;
 
-  // Normalizar el ID para buscarlo en el mapa (ej. "EJECUCIÓN" o "ejecucion" -> "EJECUCION")
   const normalizedId = id
     .toUpperCase()
     .normalize("NFD")
@@ -357,14 +452,10 @@ export default function ServiceDetail() {
   }
 
   // Filtrado dinámico de las etapas:
-  // - INTERIORES y PAISAJISMO: solo 4 etapas (Pre-Anteproyecto, Anteproyecto, Proyecto, Documentos de Obra)
-  // - ARQUITECTURA, URBANISMO, GERENCIA, EJECUCIÓN: las 6 etapas completas
-  const isFourStepSpecialty = ["INTERIORES", "PAISAJISMO"].includes(normalizedId);
-  const activeSteps = isFourStepSpecialty
-    ? serviceSteps.filter((step) =>
-        ["PRE-ANTEPROYECTO", "ANTEPROYECTO", "PROYECTO", "DOCUMENTOS DE OBRA"].includes(step.title)
-      )
-    : serviceSteps;
+  // - Todas las especialidades (excepto Gerencia) muestran solo 4 etapas (Saneamiento y Post-Ejecución se eliminan)
+  const activeSteps = serviceSteps.filter((step) =>
+    ["PRE-ANTEPROYECTO", "ANTEPROYECTO", "PROYECTO", "DOCUMENTOS DE OBRA"].includes(step.title)
+  );
 
   return (
     <PageLayout>
@@ -427,7 +518,11 @@ export default function ServiceDetail() {
         </div>
 
         {/* SECCIÓN DE ETAPAS / FLUJO DE TRABAJO (Scrolling below hero) */}
-        <WorkflowSection steps={activeSteps} />
+        {normalizedId === "GERENCIA" ? (
+          <GerenciaMethodology />
+        ) : (
+          <WorkflowSection steps={activeSteps} />
+        )}
 
       </div>
     </PageLayout>

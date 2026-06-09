@@ -124,18 +124,27 @@ function SplitSection({
   if (title === "SERVICIOS") {
     return (
       <div className="relative w-full border-t border-black/5">
-        {/* Title Centered Top - Two Tone for Contrast */}
-        <div className="absolute top-8 left-1/2 -translate-x-1/2 z-30 flex flex-nowrap">
+        {/* Title Centered Top - Two Tone for Contrast - Desktop Only */}
+        <div className="hidden xl:flex absolute top-8 left-1/2 -translate-x-1/2 z-30 flex-nowrap">
           <h2 className="font-display font-extrabold text-xs md:text-sm tracking-[0.4em] uppercase whitespace-nowrap">
             <span className="text-black">SERVI</span>
             <span className="text-white">CIOS</span>
           </h2>
         </div>
 
+        {/* Mobile Title - Centered modern container */}
+        <div className="xl:hidden w-full flex justify-center pt-8 pb-2">
+          <div className="bg-white/80 border border-black/10 backdrop-blur-md px-6 py-2.5 rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.02)]">
+            <h2 className="font-display font-extrabold text-xs tracking-[0.4em] uppercase text-black pl-[0.4em] whitespace-nowrap">
+              SERVICIOS
+            </h2>
+          </div>
+        </div>
+
         <div className="flex flex-col xl:flex-row h-auto relative overflow-hidden">
           
           {/* Left Half (DISEÑO) - White Background */}
-          <div className="w-full xl:w-1/2 bg-white relative pt-20 pb-20 px-6 sm:px-10 flex flex-col justify-start items-center border-r border-black/5">
+          <div className="w-full xl:w-1/2 bg-white relative pt-10 xl:pt-20 pb-20 px-6 sm:px-10 flex flex-col justify-start items-center border-r border-black/5">
             <h3 className="font-display font-extrabold text-xs md:text-sm tracking-[0.4em] uppercase text-black mb-16 mt-4 text-center">
               DISEÑO
             </h3>

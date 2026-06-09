@@ -1,7 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import logoFooter from "../assets/logos/logofooter.png";
 import { Mail, Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
-import whatsappIcon from "../assets/logos/whatsapp.svg";
 
 const TikTokIcon = ({ className }: { className?: string }) => (
   <svg 
@@ -28,12 +27,14 @@ export function Footer() {
   const isNosotrosPage = location.pathname.startsWith("/nosotros");
   const isServicesPage = location.pathname.startsWith("/services");
   const isContactPage = location.pathname.startsWith("/contact");
+  const isPrivacidadPage = location.pathname.startsWith("/privacidad");
+  const isTerminosPage = location.pathname.startsWith("/terminos");
   const isInvestigacionSubPage = location.pathname.startsWith("/investigacion") && location.pathname !== "/investigacion";
 
   return (
-    <footer className={`${(isNosotrosPage || isServicesPage) ? "bg-[#000000]" : ((isProyectosPage || isContactPage || isInvestigacionSubPage) ? "bg-[#1C3865]" : "bg-footer")} text-footer-foreground border-t border-white/10 py-5`}>
+    <footer className={`${(isNosotrosPage || isServicesPage) ? "bg-[#000000]" : ((isProyectosPage || isContactPage || isInvestigacionSubPage || isPrivacidadPage || isTerminosPage) ? "bg-[#1C3865]" : "bg-footer")} text-footer-foreground border-t border-white/10 py-5`}>
       <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-6 lg:gap-4 xl:gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8 lg:gap-6 xl:gap-8 mb-12">
           
           {/* Brand/Logo Section */}
           <div className="flex flex-col items-center md:items-start">
@@ -101,41 +102,6 @@ export function Footer() {
               </a>
             </div>
           </div>
-
-          {/* WhatsApp Section */}
-          <div className="flex flex-col items-center md:items-start pt-1">
-            <a 
-              href="https://wa.me/your-number" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex flex-col items-center md:items-start group"
-            >
-              <div className="flex items-center gap-4 text-white/50 group-hover:text-white transition-colors mb-3">
-                <div className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-colors">
-                  <div 
-                    className="w-4.5 h-4.5 bg-white group-hover:bg-white transition-colors"
-                    style={{
-                      maskImage: `url(${whatsappIcon})`,
-                      WebkitMaskImage: `url(${whatsappIcon})`,
-                      maskRepeat: 'no-repeat',
-                      WebkitMaskRepeat: 'no-repeat',
-                      maskSize: 'contain',
-                      WebkitMaskSize: 'contain'
-                    }}
-                  />
-                </div>
-                <span className="text-xs tracking-[0.25em] uppercase font-medium">WhatsApp</span>
-              </div>
-              <div className="bg-white px-4 py-2 rounded-xl transition-transform duration-300 group-hover:scale-105 shadow-lg relative">
-                <p className="text-black text-[10px] font-medium tracking-tight whitespace-nowrap">
-                  "¿En qué podemos ayudarte?"
-                </p>
-                {/* Visual arrow for the bubble */}
-                <div className="absolute -top-1 left-4 w-2 h-2 bg-white rotate-45 transform" />
-              </div>
-            </a>
-          </div>
-
         </div>
 
         {/* Bottom Bar */}

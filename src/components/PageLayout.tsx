@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { WhatsAppFloating } from "./WhatsAppFloating";
 
 export function PageLayout({ children }: { children: ReactNode }) {
   return (
@@ -10,6 +11,7 @@ export function PageLayout({ children }: { children: ReactNode }) {
         {children}
       </main>
       <Footer />
+      <WhatsAppFloating />
     </div>
   );
 }

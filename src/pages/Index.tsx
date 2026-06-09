@@ -103,7 +103,7 @@ export default function Index() {
             {/* TEXTO 1 with TT NORMS Typography */}
             <h1 
               style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
-              className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[0.2em] uppercase leading-none mb-1 text-shadow-md"
+              className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-[0.2em] uppercase leading-none mb-1.5 text-shadow-md"
             >
               DISEÑO ATEMPORAL
             </h1>
@@ -111,7 +111,7 @@ export default function Index() {
             {/* TEXTO 2 with Bahnschrift SemiBold Typography */}
             <p 
               style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
-              className="text-white/95 text-base sm:text-lg md:text-xl lg:text-2xl tracking-wide max-w-2xl leading-normal mb-1"
+              className="text-white/95 text-xs sm:text-sm md:text-base lg:text-lg tracking-wide max-w-2xl leading-normal mb-1"
             >
               Creamos espacios sofisticados que fusionan el arte, la técnica y el lujo atemporal.
             </p>
