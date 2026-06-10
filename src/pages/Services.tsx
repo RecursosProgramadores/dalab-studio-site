@@ -124,12 +124,13 @@ function SplitSection({
   if (title === "SERVICIOS") {
     return (
       <div className="relative w-full border-t border-black/5">
-        {/* Title Centered Top - Two Tone for Contrast - Desktop Only */}
-        <div className="hidden xl:flex absolute top-8 left-1/2 -translate-x-1/2 z-30 flex-nowrap">
-          <h2 className="font-display font-extrabold text-xs md:text-sm tracking-[0.4em] uppercase whitespace-nowrap">
-            <span className="text-black">SERVI</span>
-            <span className="text-white">CIOS</span>
-          </h2>
+        {/* Title Centered Top - Desktop Only (Absolute) */}
+        <div className="hidden xl:flex absolute top-8 left-1/2 -translate-x-1/2 z-30">
+          <div className="bg-[#1C3865] border border-white/10 px-6 py-2.5 rounded-full shadow-[0_4px_15px_rgba(28,56,101,0.25)]">
+            <h2 className="font-display font-extrabold text-xs tracking-[0.4em] uppercase text-white pl-[0.4em] whitespace-nowrap">
+              SERVICIOS
+            </h2>
+          </div>
         </div>
 
         {/* Mobile Title - Centered modern container */}
@@ -149,24 +150,24 @@ function SplitSection({
               DISEÑO
             </h3>
             
-            {/* 4 Cards Grid - Single Row on Desktop, adjusted to 2 columns on standard desktop to prevent text overlap */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-4 gap-4 w-full max-w-5xl">
+            {/* 4 Cards Grid - Single Row on Laptop & Desktop */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 w-full max-w-5xl">
               {leftData.map((item) => (
                 <Link 
                   key={item.id}
                   to={`/services/${item.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`}
-                  className="flex flex-col items-center justify-start text-center bg-transparent border-2 border-black/10 rounded-[2rem] px-5 py-12 min-h-[380px] md:min-h-[420px] transition-all duration-500 hover:-translate-y-2 hover:border-black/60 hover:bg-black/[0.01] hover:shadow-[0_15px_35px_rgba(0,0,0,0.06)] group cursor-pointer"
+                  className="flex flex-col items-center justify-start text-center bg-transparent border-2 border-black/10 rounded-[2rem] px-3 sm:px-5 lg:px-2 xl:px-4 2xl:px-5 py-12 min-h-[380px] md:min-h-[420px] transition-all duration-500 hover:-translate-y-2 hover:border-black/60 hover:bg-black/[0.01] hover:shadow-[0_15px_35px_rgba(0,0,0,0.06)] group cursor-pointer"
                 >
                   <h4 
                     style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
-                    className="text-black text-base md:text-lg tracking-[0.2em] font-bold uppercase mb-8"
+                    className="text-black text-xs sm:text-sm lg:text-[10px] xl:text-[12px] 2xl:text-base tracking-[0.1em] lg:tracking-[0.02em] xl:tracking-[0.1em] 2xl:tracking-[0.2em] font-bold uppercase mb-8 text-center w-full block px-1"
                   >
                     {item.title}
                   </h4>
                   
                   <p 
                     style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
-                    className="text-black/70 text-[11px] md:text-[12px] leading-[2.2] font-semibold text-center"
+                    className="text-black/70 text-[10px] sm:text-[11px] lg:text-[10px] xl:text-[11px] 2xl:text-xs leading-[2] sm:leading-[2.2] font-semibold text-center"
                   >
                     {item.desc}
                   </p>
@@ -187,18 +188,18 @@ function SplitSection({
                 <Link 
                   key={item.id}
                   to={`/services/${item.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`}
-                  className="flex flex-col items-center justify-start text-center bg-transparent border-2 border-white/10 rounded-[2rem] px-5 py-12 min-h-[380px] md:min-h-[420px] transition-all duration-500 hover:-translate-y-2 hover:border-white/60 hover:bg-white/[0.03] hover:shadow-[0_15px_35px_rgba(255,255,255,0.06)] group cursor-pointer"
+                  className="flex flex-col items-center justify-start text-center bg-transparent border-2 border-white/10 rounded-[2rem] px-3 sm:px-5 lg:px-2 xl:px-4 2xl:px-5 py-12 min-h-[380px] md:min-h-[420px] transition-all duration-500 hover:-translate-y-2 hover:border-white/60 hover:bg-white/[0.03] hover:shadow-[0_15px_35px_rgba(255,255,255,0.06)] group cursor-pointer"
                 >
                   <h4 
                     style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
-                    className="text-white text-base md:text-lg tracking-[0.2em] font-bold uppercase mb-8"
+                    className="text-white text-xs sm:text-sm lg:text-[10px] xl:text-[12px] 2xl:text-base tracking-[0.1em] lg:tracking-[0.02em] xl:tracking-[0.1em] 2xl:tracking-[0.2em] font-bold uppercase mb-8 text-center w-full block px-1"
                   >
                     {item.title}
                   </h4>
                   
                   <p 
                     style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
-                    className="text-white/80 text-[11px] md:text-[12px] leading-[2.2] font-semibold text-center"
+                    className="text-white/80 text-[10px] sm:text-[11px] lg:text-[10px] xl:text-[11px] 2xl:text-xs leading-[2] sm:leading-[2.2] font-semibold text-center"
                   >
                     {item.desc}
                   </p>
