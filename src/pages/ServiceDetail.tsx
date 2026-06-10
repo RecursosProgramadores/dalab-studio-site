@@ -156,7 +156,13 @@ const serviceSteps = [
   }
 ];
 
-function WorkflowSection({ steps }: { steps: any[] }) {
+function WorkflowSection({ 
+  steps, 
+  sectionTitle = "ETAPAS DE LA ESPECIALIDAD" 
+}: { 
+  steps: any[], 
+  sectionTitle?: string 
+}) {
   const [activeStepIndex, setActiveStepIndex] = useState<number | null>(null);
 
   // Resetea la sección al cambiar de especialidad/pestaña
@@ -167,57 +173,40 @@ function WorkflowSection({ steps }: { steps: any[] }) {
   return (
     <section className="w-full bg-white py-24 px-6 md:px-12 flex flex-col items-center border-t border-black/5 transition-all duration-500">
       <h2 className="font-display font-extrabold text-[#111111] text-xs md:text-sm tracking-[0.4em] uppercase text-center mb-16 select-none">
-        ETAPAS DE LA ESPECIALIDAD
+        {sectionTitle}
       </h2>
-
-      {activeStepIndex === null && (
-        <div className="w-full flex justify-center mb-10">
-          <div className="bg-white border border-black/15 px-6 py-2.5 rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.02)]">
-            <span className="font-display font-bold text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-black/60 pl-[0.25em]">
-              TIPO DE INTERVENCIÓN
-            </span>
-          </div>
-        </div>
-      )}
 
       {activeStepIndex === null ? (
         /* Default View: Clickable Grid Row centered based on length */
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 max-w-5xl gap-6 w-full mx-auto">
+        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ${
+          steps.length === 4 ? "xl:grid-cols-4 max-w-5xl" : "xl:grid-cols-6 max-w-7xl"
+        } gap-6 w-full mx-auto`}>
           {steps.map((step, index) => {
-            const interventionLabels = ["OBRA NUEVA", "AMPLIACIÓN", "REMODELACIÓN", "ACONDICIONAMIENTO"];
             return (
-              <div key={index} className="flex flex-col items-center w-full">
-                <div className="flex flex-col items-center gap-2 mb-4 animate-fade-in w-full">
-                  <div className="bg-white border border-black/15 px-4 py-2 text-black font-display font-bold text-[9px] sm:text-[10px] tracking-[0.2em] uppercase shadow-[0_4px_10px_rgba(0,0,0,0.02)] text-center min-w-[170px] select-none">
-                    {interventionLabels[index]}
-                  </div>
-                  <div className="text-black/35 text-xs font-bold leading-none select-none">&darr;</div>
-                </div>
-
-                <div 
-                  onClick={() => setActiveStepIndex(index)}
-                  className="flex flex-col items-center justify-start text-center bg-[#000000] rounded-[2rem] px-5 py-12 min-h-[440px] md:min-h-[480px] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] group select-none animate-fade-in cursor-pointer border-2 border-transparent hover:border-white/10 w-full"
+              <div 
+                key={index}
+                onClick={() => setActiveStepIndex(index)}
+                className="flex flex-col items-center justify-start text-center bg-[#000000] rounded-[2rem] px-5 py-12 min-h-[440px] md:min-h-[480px] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] group select-none animate-fade-in cursor-pointer border-2 border-transparent hover:border-white/10 w-full"
+              >
+                {/* Top: Step Title */}
+                <h4 
+                  style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
+                  className="text-white text-xs md:text-sm tracking-[0.15em] font-bold uppercase mb-8 transition-transform duration-300 group-hover:scale-105"
                 >
-                  {/* Top: Step Title */}
-                  <h4 
-                    style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
-                    className="text-white text-sm md:text-base tracking-[0.15em] font-bold uppercase mb-8 transition-transform duration-300 group-hover:scale-105"
-                  >
-                    {step.title}
-                  </h4>
-                  
-                  {/* Middle: Step Description */}
-                  <p 
-                    style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
-                    className="text-white/80 text-[11px] md:text-[12px] leading-[2.2] font-semibold text-center"
-                  >
-                    {step.description}
-                  </p>
+                  {step.title}
+                </h4>
+                
+                {/* Middle: Step Description */}
+                <p 
+                  style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
+                  className="text-white/85 text-[11px] leading-[2.1] font-semibold text-center"
+                >
+                  {step.description}
+                </p>
 
-                  {/* Micro-interaction indicator at bottom */}
-                  <div className="mt-auto pt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1.5 text-white/50 text-[10px] tracking-[0.2em] uppercase font-bold">
-                    VER MÁS <span className="text-xs">&rarr;</span>
-                  </div>
+                {/* Micro-interaction indicator at bottom */}
+                <div className="mt-auto pt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1.5 text-white/50 text-[10px] tracking-[0.2em] uppercase font-bold">
+                  VER MÁS <span className="text-xs">&rarr;</span>
                 </div>
               </div>
             );
@@ -435,6 +424,25 @@ function GerenciaMethodology() {
   );
 }
 
+const ejecucionSteps = [
+  {
+    ...serviceSteps[1],
+    title: "OBRA NUEVA"
+  },
+  {
+    ...serviceSteps[2],
+    title: "AMPLIACIÓN"
+  },
+  {
+    ...serviceSteps[3],
+    title: "REMODELACIÓN"
+  },
+  {
+    ...serviceSteps[4],
+    title: "ACONDICIONAMIENTO"
+  }
+];
+
 export default function ServiceDetail() {
   const { id } = useParams();
 
@@ -451,11 +459,8 @@ export default function ServiceDetail() {
     return <Navigate to="/services" replace />;
   }
 
-  // Filtrado dinámico de las etapas:
-  // - Todas las especialidades (excepto Gerencia) muestran solo 4 etapas (Saneamiento y Post-Ejecución se eliminan)
-  const activeSteps = serviceSteps.filter((step) =>
-    ["PRE-ANTEPROYECTO", "ANTEPROYECTO", "PROYECTO", "DOCUMENTOS DE OBRA"].includes(step.title)
-  );
+  // Para las especialidades de diseño, se muestran las 6 etapas completas:
+  const activeSteps = serviceSteps;
 
   return (
     <PageLayout>
@@ -477,24 +482,24 @@ export default function ServiceDetail() {
           {/* Back Link Button */}
           <Link 
             to="/services" 
-            className="pointer-events-auto absolute top-8 left-6 md:top-12 md:left-12 z-30 flex items-center gap-2.5 text-white/50 hover:text-white transition-all duration-300 tracking-[0.25em] text-xs font-semibold uppercase group hover:-translate-x-1"
+            className="pointer-events-auto absolute top-8 left-6 md:left-10 lg:left-12 xl:left-20 2xl:left-28 z-30 flex items-center gap-2.5 text-white/50 hover:text-white transition-all duration-300 tracking-[0.25em] text-xs font-semibold uppercase group hover:-translate-x-1"
           >
             <span className="text-base transition-transform group-hover:-translate-x-0.5">&larr;</span> VOLVER
           </Link>
 
           {/* Bottom Left Content Container */}
-          <div className="relative z-10 w-full h-full flex flex-col items-start justify-end text-left px-6 sm:px-12 md:px-20 lg:px-28 pb-12 sm:pb-20 md:pb-24 lg:pb-28 pointer-events-none select-none">
+          <div className="relative z-10 w-full h-full flex flex-col items-start justify-end text-left px-6 sm:px-8 md:px-10 lg:px-12 xl:px-20 2xl:px-28 pb-8 sm:pb-10 md:pb-12 lg:pb-10 xl:pb-16 2xl:pb-24 pointer-events-none select-none">
             <div className="flex flex-col items-start max-w-4xl animate-fade-in">
               {/* TEXTO 1 with TT NORMS Typography */}
               <h1 
                 style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
-                className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.2em] uppercase leading-none mb-1 text-shadow-md"
+                className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-[0.2em] uppercase leading-none mb-1 text-shadow-md"
               >
                 {service.title}
               </h1>
               <span 
                 style={{ fontFamily: '"TT Norms", "Montserrat", sans-serif' }}
-                className="text-white/60 text-xs sm:text-sm md:text-base tracking-[0.3em] uppercase font-light block mb-8 sm:mb-10"
+                className="text-white/60 text-[9px] sm:text-[10px] md:text-xs tracking-[0.3em] uppercase font-light block mb-6 sm:mb-8"
               >
                 (tipografía TT NORMS)
               </span>
@@ -502,13 +507,13 @@ export default function ServiceDetail() {
               {/* TEXTO 2 with Bahnschrift SemiBold Typography */}
               <p 
                 style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
-                className="text-white/90 text-[13px] sm:text-base md:text-lg lg:text-xl tracking-wide max-w-3xl leading-relaxed mb-2"
+                className="text-white/90 text-[12px] sm:text-[14px] md:text-base lg:text-base xl:text-lg 2xl:text-xl tracking-wide max-w-3xl leading-relaxed mb-2"
               >
                 {service.description}
               </p>
               <span 
                 style={{ fontFamily: '"Bahnschrift", "Segoe UI", "Montserrat", sans-serif', fontWeight: 600 }}
-                className="text-white/55 text-xs sm:text-sm md:text-base tracking-[0.2em] uppercase block"
+                className="text-white/55 text-[9px] sm:text-[10px] md:text-xs tracking-[0.2em] uppercase block"
               >
                 (tipografía Bahnschrift SemiBol)
               </span>
@@ -520,6 +525,11 @@ export default function ServiceDetail() {
         {/* SECCIÓN DE ETAPAS / FLUJO DE TRABAJO (Scrolling below hero) */}
         {normalizedId === "GERENCIA" ? (
           <GerenciaMethodology />
+        ) : normalizedId === "EJECUCION" ? (
+          <WorkflowSection 
+            steps={ejecucionSteps} 
+            sectionTitle="TIPO DE INTERVENCIÓN" 
+          />
         ) : (
           <WorkflowSection steps={activeSteps} />
         )}

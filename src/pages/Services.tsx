@@ -134,8 +134,8 @@ function SplitSection({
 
         {/* Mobile Title - Centered modern container */}
         <div className="xl:hidden w-full flex justify-center pt-8 pb-2">
-          <div className="bg-white/80 border border-black/10 backdrop-blur-md px-6 py-2.5 rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.02)]">
-            <h2 className="font-display font-extrabold text-xs tracking-[0.4em] uppercase text-black pl-[0.4em] whitespace-nowrap">
+          <div className="bg-[#1C3865] border border-white/10 px-6 py-2.5 rounded-full shadow-[0_4px_15px_rgba(28,56,101,0.25)]">
+            <h2 className="font-display font-extrabold text-xs tracking-[0.4em] uppercase text-white pl-[0.4em] whitespace-nowrap">
               SERVICIOS
             </h2>
           </div>
@@ -149,8 +149,8 @@ function SplitSection({
               DISEÑO
             </h3>
             
-            {/* 4 Cards Grid - Single Row on Desktop */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-5xl">
+            {/* 4 Cards Grid - Single Row on Desktop, adjusted to 2 columns on standard desktop to prevent text overlap */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-4 gap-4 w-full max-w-5xl">
               {leftData.map((item) => (
                 <Link 
                   key={item.id}
