@@ -459,8 +459,10 @@ export default function ServiceDetail() {
     return <Navigate to="/services" replace />;
   }
 
-  // Para las especialidades de diseño, se muestran las 6 etapas completas:
-  const activeSteps = serviceSteps;
+  // Para las especialidades de diseño, se muestran las etapas correspondientes:
+  const activeSteps = (normalizedId === "INTERIORES" || normalizedId === "PAISAJISMO")
+    ? serviceSteps.filter(step => step.title !== "SANEAMIENTO" && step.title !== "POST-EJECUCIÓN")
+    : serviceSteps;
 
   return (
     <PageLayout>
