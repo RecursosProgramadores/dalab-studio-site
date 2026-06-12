@@ -4,7 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  base: "/dalab-studio-site/", // 👈 CLAVE
+  base: "/", // 👈 CLAVE
 
   server: {
     host: "::",
